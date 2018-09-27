@@ -16,6 +16,6 @@ final class ExcelToJsonMojo extends AbstractMojo {
   private MavenProject project;
 
   public void execute() {
-    new ExcelToJson().execute();
+    new ExcelToJson(project).execute();
   }
 }

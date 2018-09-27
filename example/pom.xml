@@ -31,41 +31,19 @@
 
   <build>
     <plugins>
-      <!--<plugin>-->
-      <!--<groupId>org.codehaus.mojo</groupId>-->
-      <!--<artifactId>build-helper-maven-plugin</artifactId>-->
-      <!--<version>1.12</version>-->
-      <!--<executions>-->
-      <!--<execution>-->
-      <!--<id>add-source</id>-->
-      <!--<phase>generate-sources</phase>-->
-      <!--<goals>-->
-      <!--<goal>add-source</goal>-->
-      <!--</goals>-->
-      <!--<configuration>-->
-      <!--<sources>-->
-      <!--<source>${project.basedir}/src/main/java-gen</source>-->
-      <!--</sources>-->
-      <!--</configuration>-->
-      <!--</execution>-->
-      <!--</executions>-->
-      <!--</plugin>-->
-
-      <!--<plugin>-->
-      <!--<groupId>org.apache.maven.plugins</groupId>-->
-      <!--<artifactId>maven-compiler-plugin</artifactId>-->
-      <!--<version>3.6.2</version>-->
-      <!--<configuration>-->
-      <!--<annotationProcessorPaths>-->
-      <!--<path>-->
-      <!--<groupId>luj.persist</groupId>-->
-      <!--<artifactId>lujpersist-compiler</artifactId>-->
-      <!--<version>0.1-SNAPSHOT</version>-->
-      <!--</path>-->
-      <!--</annotationProcessorPaths>-->
-      <!--</configuration>-->
-      <!--</plugin>-->
+      <plugin>
+        <groupId>luj.config</groupId>
+        <artifactId>lujconfig-maven-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <!--<executions>-->
+        <!--<execution>-->
+        <!--<phase>generate-sources</phase>-->
+        <!--<goals>-->
+        <!--<goal>hello</goal>-->
+        <!--</goals>-->
+        <!--</execution>-->
+        <!--</executions>-->
+      </plugin>
     </plugins>
   </build>
-
 </project>

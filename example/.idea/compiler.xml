@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="example" />
         <module name="lujconfig" />
+        <module name="lujconfig-maven-plugin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="example" target="1.8" />
       <module name="lujconfig" target="1.8" />
+      <module name="lujconfig-maven-plugin" target="1.5" />
       <module name="lujparent" target="1.8" />
     </bytecodeTargetLevel>
   </component>

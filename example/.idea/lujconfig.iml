@@ -4,6 +4,7 @@
     <output url="file://$MODULE_DIR$/../lujconfig/target/classes" />
     <output-test url="file://$MODULE_DIR$/../lujconfig/target/test-classes" />
     <content url="file://$MODULE_DIR$/../lujconfig">
+      <sourceFolder url="file://$MODULE_DIR$/../lujconfig/src/main/java" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../lujconfig/target" />
     </content>
     <orderEntry type="inheritedJdk" />

@@ -12,14 +12,12 @@ class TableRowMergerImpl implements TableRowMerger {
     List result = []
 
     List<Row> lastGroup = [_rowIter.next()]
-    List<Row> nextGroup = []
-
     while (_rowIter.hasNext()) {
+      List<Row> nextGroup = []
       collectGroup(lastGroup, nextGroup)
-      result.add(lastGroup)
 
+      result.add(lastGroup)
       lastGroup = nextGroup
-      nextGroup = []
     }
 
     if (lastGroup) {

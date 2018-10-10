@@ -1,22 +1,24 @@
-package luj.config.maven.plugin.excel.sheet
+package luj.config.maven.plugin.excel.sheet.merge
 
 import spock.lang.Specification
 
-class TableRowMergerTest extends Specification {
+class TableRowMergerImplTest extends Specification {
 
-  Iterator<TableRowMerger.Row> _rowIter
+  Iterator<TableRowMergerImpl.Row> _rowIter
 
   void setup() {
     // NOOP
   }
 
-  def 'merge:多行'() {
+  def 'Merge:多行'() {
     given:
     _rowIter = mockRows([
         ['1', 'a', 'a1'],
         [null, '', 'a2'],
         ['', ' ', 'a3'],
         ['2', 'b'],
+        ['3', 'c', 'c1'],
+        ['4'],
     ])
 
     when:
@@ -26,10 +28,12 @@ class TableRowMergerTest extends Specification {
     result == [
         [['1'], ['a'], ['a1', 'a2', 'a3']],
         [['2'], ['b'], []],
+        [['3'], ['c'], ['c1']],
+        [['4'], [], []],
     ]
   }
 
-  def 'merge:列数与行数不同'() {
+  def 'Merge:列数与行数不同'() {
     given:
     _rowIter = mockRows([
         ['1', 'a', 'a1'],
@@ -46,7 +50,7 @@ class TableRowMergerTest extends Specification {
   }
 
   List merge() {
-    return new TableRowMerger(_rowIter).merge()
+    return new TableRowMergerImpl(_rowIter).merge()
   }
 
   def mockRows(List input) {
@@ -59,6 +63,6 @@ class TableRowMergerTest extends Specification {
     return [
         getColumn  : { value[it] },
         countColumn: { -> value.size() },
-    ] as TableRowMerger.Row
+    ] as TableRowMergerImpl.Row
   }
 }

@@ -1,12 +1,13 @@
-package luj.config.maven.plugin.excel.sheet
+package luj.config.maven.plugin.excel.sheet.merge
 
 import groovy.transform.PackageScope
 import luj.groovy.AutoCtor
 
 @PackageScope
 @AutoCtor
-class TableRowMerger {
+class TableRowMergerImpl implements TableRowMerger {
 
+  @Override
   List merge() {
     List result = []
 
@@ -16,10 +17,13 @@ class TableRowMerger {
     while (_rowIter.hasNext()) {
       collectGroup(lastGroup, nextGroup)
       result.add(lastGroup)
+
+      lastGroup = nextGroup
+      nextGroup = []
     }
 
-    if (nextGroup) {
-      result.add(nextGroup)
+    if (lastGroup) {
+      result.add(lastGroup)
     }
 
     int colCount = result

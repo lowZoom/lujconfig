@@ -18,7 +18,7 @@ class SheetImpl implements ExcelReader.Sheet {
     def converter = SheetToMapConverter.Factory.create(_sheet)
     List<Map> jsonList = converter.toMaps()
 
-    println(JsonOutput.toJson(jsonList[0]))
+    println(JsonOutput.toJson(jsonList).replace('},', '},\n'))
   }
 
   private Sheet _sheet

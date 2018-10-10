@@ -1,6 +1,7 @@
 package luj.config.maven.plugin.excel.sheet
 
 import groovy.transform.PackageScope
+import luj.config.maven.plugin.excel.sheet.merge.TableRowMerger
 import luj.groovy.AutoCtor
 import org.apache.poi.ss.usermodel.Row
 
@@ -20,7 +21,7 @@ class HeaderImpl implements SheetToMapConverterImpl.Header {
 
   @Override
   List<SheetToMapConverterImpl.Data> getDataList() {
-    return new TableRowMerger(new RowIterImpl(_rowIter)).merge()
+    return TableRowMerger.Factory.create(_rowIter).merge()
         .collect { new DataImpl(it) }
   }
 

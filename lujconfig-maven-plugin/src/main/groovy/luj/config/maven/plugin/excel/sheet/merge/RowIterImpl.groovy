@@ -1,11 +1,11 @@
-package luj.config.maven.plugin.excel.sheet
+package luj.config.maven.plugin.excel.sheet.merge
 
 import groovy.transform.PackageScope
 import luj.groovy.AutoCtor
 
 @PackageScope
 @AutoCtor
-class RowIterImpl implements Iterator<TableRowMerger.Row> {
+class RowIterImpl implements Iterator<TableRowMergerImpl.Row> {
 
   @Override
   boolean hasNext() {
@@ -13,7 +13,7 @@ class RowIterImpl implements Iterator<TableRowMerger.Row> {
   }
 
   @Override
-  TableRowMerger.Row next() {
+  TableRowMergerImpl.Row next() {
     return new RowImpl(_iter.next())
   }
 

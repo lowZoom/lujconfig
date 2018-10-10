@@ -15,6 +15,7 @@ final class ExcelToJsonMojo extends AbstractMojo {
   @Parameter(defaultValue = "${project}", readonly = true)
   private MavenProject project;
 
+  @Override
   public void execute() {
     new ExcelToJson(project).execute();
   }

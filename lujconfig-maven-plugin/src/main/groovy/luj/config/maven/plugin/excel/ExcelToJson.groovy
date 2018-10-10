@@ -16,7 +16,8 @@ class ExcelToJson {
     new ExcelCollector(excelRoot).collect()
         .collect { new ExcelReader(it).read() }
         .flatten()
-        .each { ExcelReader.Sheet s -> s.writeJsonFile() }
+        .collect { it as ExcelReader.Sheet }
+        .each { it.writeJsonFile() }
   }
 
   private MavenProject _project

@@ -29,6 +29,15 @@
       <version>2.4.15</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <!-- 版本太新会导致maven插件编译出错 -->
+      <!-- https://issues.apache.org/jira/browse/MPLUGIN-312 -->
+      <version>21.0</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.apache.maven/maven-plugin-api -->
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -135,5 +144,14 @@
         </configuration>
       </plugin>
     </plugins>
+
+    <testResources>
+      <testResource>
+        <directory>${build.testSourceDirectory}/../groovy</directory>
+        <excludes>
+          <exclude>**/*.groovy</exclude>
+        </excludes>
+      </testResource>
+    </testResources>
   </build>
 </project>

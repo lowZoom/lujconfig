@@ -16,7 +16,6 @@
     <inspection_tool class="GroovyAssignmentToMethodParameter" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="GroovyBreak" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="GroovyBusyWait" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="GroovyConditional" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="GroovyConditionalCanBeConditionalCall" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="GroovyConditionalCanBeElvis" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="GroovyConstantNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
@@ -126,7 +125,6 @@
     <inspection_tool class="GroovyWhileLoopSpinsOnField" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreNonEmtpyLoops" value="false" />
     </inspection_tool>
-    <inspection_tool class="JavaStylePropertiesInvocation" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="NewGroovyClassNamingConvention" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SingletonConstructor" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">

@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class TableRowMergerImplTest extends Specification {
 
-  List<TableRowMergerImpl.Row> _rows
+  List _rows
 
   void setup() {
     // NOOP
@@ -13,12 +13,12 @@ class TableRowMergerImplTest extends Specification {
   def 'Merge:多行'() {
     given:
     _rows = [
-        ['1', 'a', 'a1'],
+        [1, 'a', 'a1'],
         [null, '', 'a2'],
         ['', ' ', 'a3'],
-        ['2', 'b'],
-        ['3', 'c', 'c1'],
-        ['4'],
+        [2, 'b'],
+        [3, 'c', 'c1'],
+        [4],
     ]
 
     when:
@@ -26,10 +26,10 @@ class TableRowMergerImplTest extends Specification {
 
     then:
     result == [
-        [['1'], ['a'], ['a1', 'a2', 'a3']],
-        [['2'], ['b'], []],
-        [['3'], ['c'], ['c1']],
-        [['4'], [], []],
+        [[1], ['a'], ['a1', 'a2', 'a3']],
+        [[2], ['b'], []],
+        [[3], ['c'], ['c1']],
+        [[4], [], []],
     ]
   }
 
@@ -59,7 +59,7 @@ class TableRowMergerImplTest extends Specification {
         .iterator()
   }
 
-  def mockRow(List<String> value) {
+  def mockRow(List value) {
     return [
         getColumn  : { value[it] },
         countColumn: { -> value.size() },

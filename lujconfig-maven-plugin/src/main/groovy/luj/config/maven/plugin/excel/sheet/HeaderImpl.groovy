@@ -21,11 +21,11 @@ class HeaderImpl implements SheetToMapConverterImpl.Header {
 
   @Override
   List<SheetToMapConverterImpl.Data> getDataList() {
-    return TableRowMerger.Factory.create(_rowIter).merge()
+    return TableRowMerger.Factory.create(_dataIter).merge()
         .collect { new DataImpl(it) }
   }
 
   private List<String> _headerList
 
-  private Iterator<Row> _rowIter
+  private Iterator<Row> _dataIter
 }

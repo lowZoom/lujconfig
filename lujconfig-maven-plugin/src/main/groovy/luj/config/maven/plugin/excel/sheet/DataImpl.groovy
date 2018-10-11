@@ -12,5 +12,5 @@ class DataImpl implements SheetToMapConverterImpl.Data {
     return _columnList[index]
   }
 
-  private List<String> _columnList
+  private List _columnList
 }

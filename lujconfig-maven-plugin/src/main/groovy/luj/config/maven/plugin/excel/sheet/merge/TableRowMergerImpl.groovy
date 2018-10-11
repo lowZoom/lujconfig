@@ -35,9 +35,9 @@ class TableRowMergerImpl implements TableRowMerger {
   private void collectGroup(List<Row> lastGroup, List<Row> nextGroup) {
     while (_rowIter.hasNext()) {
       Row row = _rowIter.next()
-      String firstCol = row.getColumn(0)
+      Object firstCol = row.getColumn(0)
 
-      if (firstCol) {
+      if (!isEmpty(firstCol)) {
         nextGroup.add(row)
         return
       }
@@ -60,13 +60,19 @@ class TableRowMergerImpl implements TableRowMerger {
   private List collectColumn(List<Row> rowList, int col) {
     return rowList
         .collect { it.getColumn(col) }
-        .collect { it?.trim() }
-        .findAll()
+        .findAll { !isEmpty(it) }
+  }
+
+  private boolean isEmpty(Object val) {
+    if (val instanceof String) {
+      return val.trim().isEmpty()
+    }
+    return val == null
   }
 
   interface Row {
 
-    String getColumn(int index)
+    Object getColumn(int index)
 
     int countColumn()
   }

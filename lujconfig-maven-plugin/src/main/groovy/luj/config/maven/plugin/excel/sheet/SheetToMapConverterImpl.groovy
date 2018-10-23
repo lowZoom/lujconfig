@@ -9,34 +9,61 @@ class SheetToMapConverterImpl implements SheetToMapConverter {
 
   @Override
   List<Map> toMaps() {
-    Header header = _sheet.header
-
-    return header.dataList
-        .collect { toJsonMap(header, it) }
+    return _sheet.getRowList()
+        .collect { toJsonMap(it) }
   }
 
-  private Map toJsonMap(Header header, Data data) {
-    return (0..<header.columnCount)
-        .collectEntries { [(header.getColumn(it)): data.getColumn(it)] }
+  private Map toJsonMap(DataRow row) {
+    return (0..<_sheet.getColumnCount())
+        .collectEntries { toEntry(row.getColumn(it)) }
+  }
+
+  private Map toEntry(DataColumn column) {
+    List rawValue = column.getValue()
+    if (!rawValue) {
+      return [:]
+    }
+
+    ColumnHeader header = column.getHeader()
+    String colName = header.getName()
+    if (header.isList()) {
+      return [(colName): rawValue]
+    }
+
+    Object singleVal = rawValue[0]
+    if (!singleVal) {
+      return []
+    }
+    return [(colName): singleVal]
   }
 
   interface Sheet {
 
-    Header getHeader()
-  }
-
-  interface Header {
+    List<DataRow> getRowList()
 
     int getColumnCount()
-
-    String getColumn(int index)
-
-    List<Data> getDataList()
   }
 
-  interface Data {
+  /**
+   * 代表一行数据项
+   */
+  interface DataRow {
 
-    Object getColumn(int index)
+    DataColumn getColumn(int index)
+  }
+
+  interface DataColumn {
+
+    ColumnHeader getHeader()
+
+    List getValue()
+  }
+
+  interface ColumnHeader {
+
+    String getName()
+
+    boolean isList()
   }
 
   private Sheet _sheet

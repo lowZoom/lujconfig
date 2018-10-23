@@ -2,6 +2,7 @@ package luj.config.maven.plugin.excel
 
 import org.apache.maven.project.MavenProject
 
+import java.nio.file.Path
 import java.nio.file.Paths
 
 class ExcelToJson {
@@ -11,7 +12,7 @@ class ExcelToJson {
   }
 
   void execute() {
-    def excelRoot = Paths.get(_project.basedir.absolutePath, 'dat', 'excel')
+    Path excelRoot = Paths.get(_project.basedir.absolutePath, 'dat', 'excel')
 
     new ExcelCollector(excelRoot).collect()
         .collect { new ExcelReader(it).read() }

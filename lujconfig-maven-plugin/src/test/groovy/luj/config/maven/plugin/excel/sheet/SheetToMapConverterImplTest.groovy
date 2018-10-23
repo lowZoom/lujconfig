@@ -4,20 +4,24 @@ import spock.lang.Specification
 
 class SheetToMapConverterImplTest extends Specification {
 
-  List _header
-  List _dataList
+  List<Map> _header
+  List _rowList
 
   void setup() {
     // NOOP
   }
 
-  def 'ToMaps'() {
+  def 'ToMaps:非数组'() {
     given:
-    _header = ['a', 'b', 'c']
+    _header = [
+        [name: 'a'],
+        [name: 'b'],
+        [name: 'c'],
+    ]
 
-    _dataList = [
-        [101, 'a', [3, 4, 5]],
-        [102, 'bb', []],
+    _rowList = [
+        [[101], ['AA'], []],
+        [[102], [], []],
     ]
 
     when:
@@ -25,8 +29,31 @@ class SheetToMapConverterImplTest extends Specification {
 
     then:
     result == [
-        [a: 101, b: 'a', c: [3, 4, 5]],
-        [a: 102, b: 'bb', c: []],
+        [a: 101, b: 'AA'],
+        [a: 102],
+    ]
+  }
+
+  def 'ToMaps:数组'() {
+    given:
+    _header = [
+        [name: 'a', list: true],
+        [name: 'b', list: true],
+        [name: 'c', list: true],
+    ]
+
+    _rowList = [
+        [[101, 102], ['AA'], []],
+        [[201], [], []],
+    ]
+
+    when:
+    def result = toMaps()
+
+    then:
+    result == [
+        [a: [101, 102], b: ['AA']],
+        [a: [201]],
     ]
   }
 
@@ -36,21 +63,27 @@ class SheetToMapConverterImplTest extends Specification {
 
   def mockSheet() {
     return [
-        getHeader: { mockHeader() },
+        getRowList    : { _rowList.collect { mockRow(it) } },
+        getColumnCount: { _header.size() },
     ] as SheetToMapConverterImpl.Sheet
   }
 
-  def mockHeader() {
+  def mockRow(List row) {
     return [
-        getColumnCount: { _header.size() },
-        getColumn     : { _header[it] },
-        getDataList   : { _dataList.collect { mockData(it) } },
-    ] as SheetToMapConverterImpl.Header
+        getColumn: { mockColumn(row, it) },
+    ] as SheetToMapConverterImpl.DataRow
   }
 
-  def mockData(List list) {
+  def mockColumn(List row, int col) {
+    Map headerMap = _header[col]
+    def header = [
+        getName: { headerMap['name'] },
+        isList : { headerMap['list'] as boolean },
+    ] as SheetToMapConverterImpl.ColumnHeader
+
     return [
-        getColumn: { list[it] },
-    ] as SheetToMapConverterImpl.Data
+        getHeader: { header },
+        getValue : { row[col] },
+    ] as SheetToMapConverterImpl.DataColumn
   }
 }

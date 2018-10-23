@@ -7,7 +7,8 @@ interface SheetToMapConverter {
   abstract class Factory {
 
     static SheetToMapConverter create(Sheet sheet) {
-      return new SheetToMapConverterImpl(new SheetImpl(sheet))
+      def sheetImpl = new SheetFactory(sheet).create()
+      return new SheetToMapConverterImpl(sheetImpl)
     }
   }
 

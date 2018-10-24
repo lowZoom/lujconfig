@@ -1,6 +1,6 @@
 package luj.config.maven.plugin.excel
 
-import groovy.json.JsonOutput
+import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.transform.PackageScope
 import luj.config.maven.plugin.excel.sheet.SheetToMapConverter
 import luj.groovy.AutoCtor
@@ -18,7 +18,8 @@ class SheetImpl implements ExcelReader.Sheet {
     def converter = SheetToMapConverter.Factory.create(_sheet)
     List<Map> jsonList = converter.toMaps()
 
-    println(JsonOutput.toJson(jsonList).replace('},', '},\n'))
+    String jsonStr = new ObjectMapper().writeValueAsString(jsonList)
+    println(jsonStr.replace('},', '},\n'))
   }
 
   private Sheet _sheet

@@ -13,7 +13,7 @@ class DataRowImpl implements SheetToMapConverterImpl.DataRow {
     SheetColumnMerger.Field field = _headerList[index]
     def header = new ColumnHeaderImpl(field.getName())
 
-    return new DataColumnImpl(header, _columnList[index])
+    return new DataColumnImpl(header, field, _columnList[index])
   }
 
   private List<SheetColumnMerger.Field> _headerList

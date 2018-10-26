@@ -14,17 +14,17 @@ class SheetToMapConverterImpl implements SheetToMapConverter {
   }
 
   private Map toJsonMap(DataRow row) {
-    return (0..<_sheet.getColumnCount())
+    return (0..<_sheet.getFieldCount())
         .collectEntries { toEntry(row.getColumn(it)) }
   }
 
-  private Map toEntry(DataColumn column) {
-    List rawValue = column.getValue()
+  private Map toEntry(DataColumn field) {
+    List rawValue = field.getValue()
     if (!rawValue) {
       return [:]
     }
 
-    ColumnHeader header = column.getHeader()
+    ColumnHeader header = field.getHeader()
     String colName = header.getName()
     if (header.isList()) {
       return [(colName): rawValue]
@@ -41,7 +41,7 @@ class SheetToMapConverterImpl implements SheetToMapConverter {
 
     List<DataRow> getRowList()
 
-    int getColumnCount()
+    int getFieldCount()
   }
 
   /**

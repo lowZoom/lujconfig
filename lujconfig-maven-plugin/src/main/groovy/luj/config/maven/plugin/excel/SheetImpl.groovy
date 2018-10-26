@@ -18,8 +18,10 @@ class SheetImpl implements ExcelReader.Sheet {
     def converter = SheetToMapConverter.Factory.create(_sheet)
     List<Map> jsonList = converter.toMaps()
 
-    String jsonStr = new ObjectMapper().writeValueAsString(jsonList)
-    println(jsonStr.replace('},', '},\n'))
+    def jsonEncoder = new ObjectMapper()
+    println(jsonList
+        .collect { jsonEncoder.writeValueAsString(it) }
+        .join('\n'))
   }
 
   private Sheet _sheet

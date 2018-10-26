@@ -51,17 +51,28 @@ class TableRowMergerImpl implements TableRowMerger {
         .orElse(0)
   }
 
+  /**
+   * @param columnCount 字段总数量
+   */
   private List mergeGroup(List<Row> group, int columnCount) {
     return (0..<columnCount)
         .collect { collectColumn(group, it) }
   }
 
+  /**
+   * 收集同一列中的非空值（即去除列中的空值）
+   *
+   * @param rowList 同一数据项包含的所有行
+   */
   private List collectColumn(List<Row> rowList, int col) {
     return rowList
         .collect { it.getColumn(col) }
         .findAll { !isEmpty(it) }
   }
 
+  /**
+   * 判断是否为空（即excel里没填东西）
+   */
   private boolean isEmpty(Object val) {
     if (val instanceof String) {
       return val.trim().isEmpty()

@@ -17,7 +17,7 @@ class SheetImpl implements SheetToMapConverterImpl.Sheet {
   }
 
   @Override
-  int getColumnCount() {
+  int getFieldCount() {
     return _headerList.size()
   }
 

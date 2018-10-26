@@ -64,7 +64,7 @@ class SheetToMapConverterImplTest extends Specification {
   def mockSheet() {
     return [
         getRowList    : { _rowList.collect { mockRow(it) } },
-        getColumnCount: { _header.size() },
+        getFieldCount: { _header.size() },
     ] as SheetToMapConverterImpl.Sheet
   }
 

@@ -1,4 +1,4 @@
-package luj.config.maven.plugin.excel.sheet.merge
+package luj.config.maven.plugin.excel.sheet.merge.row
 
 import groovy.transform.PackageScope
 import luj.groovy.AutoCtor
@@ -17,11 +17,14 @@ class RowIterImpl implements Iterator<TableRowMergerImpl.Row> {
   @Override
   TableRowMergerImpl.Row next() {
     Row poiRow = _iter.next()
-    Workbook workbook = poiRow.getSheet().getWorkbook()
 
+    Workbook workbook = poiRow.getSheet().getWorkbook()
     def eval = workbook.getCreationHelper().createFormulaEvaluator()
-    return new RowImpl(poiRow, eval)
+
+    return new RowImpl(_headerList, poiRow, eval)
   }
 
   private Iterator<Row> _iter
+
+  private List _headerList
 }

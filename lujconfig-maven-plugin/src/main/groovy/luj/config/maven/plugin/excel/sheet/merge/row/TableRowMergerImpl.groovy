@@ -1,4 +1,4 @@
-package luj.config.maven.plugin.excel.sheet.merge
+package luj.config.maven.plugin.excel.sheet.merge.row
 
 import groovy.transform.PackageScope
 import luj.groovy.AutoCtor
@@ -19,7 +19,6 @@ class TableRowMergerImpl implements TableRowMerger {
       result.add(lastGroup)
       lastGroup = nextGroup
     }
-
     if (lastGroup) {
       result.add(lastGroup)
     }

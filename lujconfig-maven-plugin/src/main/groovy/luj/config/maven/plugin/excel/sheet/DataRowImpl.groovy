@@ -1,6 +1,7 @@
 package luj.config.maven.plugin.excel.sheet
 
 import groovy.transform.PackageScope
+import luj.config.maven.plugin.excel.sheet.merge.column.SheetColumnMerger
 import luj.groovy.AutoCtor
 
 @PackageScope
@@ -9,13 +10,13 @@ class DataRowImpl implements SheetToMapConverterImpl.DataRow {
 
   @Override
   SheetToMapConverterImpl.DataColumn getColumn(int index) {
-    String headerStr = _headerList[index]
-    def header = new ColumnHeaderImpl(headerStr)
+    SheetColumnMerger.Field field = _headerList[index]
+    def header = new ColumnHeaderImpl(field.getName())
 
     return new DataColumnImpl(header, _columnList[index])
   }
 
-  private List<String> _headerList
+  private List<SheetColumnMerger.Field> _headerList
 
   private List _columnList
 }

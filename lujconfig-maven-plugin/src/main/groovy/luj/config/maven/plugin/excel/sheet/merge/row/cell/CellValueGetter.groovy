@@ -1,4 +1,4 @@
-package luj.config.maven.plugin.excel.sheet.merge.cell
+package luj.config.maven.plugin.excel.sheet.merge.row.cell
 
 import org.apache.poi.ss.usermodel.CellValue
 

@@ -1,4 +1,4 @@
-package luj.config.maven.plugin.excel.sheet.merge
+package luj.config.maven.plugin.excel.sheet.merge.row
 
 import spock.lang.Specification
 
@@ -46,6 +46,22 @@ class TableRowMergerImplTest extends Specification {
     then:
     result == [
         [['1'], ['a', 'a'], ['a1']],
+    ]
+  }
+
+  def 'Merge:内嵌对象'() {
+    given:
+    _rows = [
+        ['m106', ['s201', 50]],
+        [null, ['s205', 30]],
+    ]
+
+    when:
+    def result = merge()
+
+    then:
+    result == [
+        [['m106'], [['s201', 50], ['s205', 30]]],
     ]
   }
 

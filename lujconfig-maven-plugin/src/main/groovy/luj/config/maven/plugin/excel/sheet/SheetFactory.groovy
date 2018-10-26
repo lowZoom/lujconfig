@@ -1,6 +1,7 @@
 package luj.config.maven.plugin.excel.sheet
 
 import groovy.transform.PackageScope
+import luj.config.maven.plugin.excel.sheet.merge.column.SheetColumnMerger
 import luj.groovy.AutoCtor
 import org.apache.poi.ss.usermodel.BorderStyle
 import org.apache.poi.ss.usermodel.Row
@@ -21,7 +22,8 @@ class SheetFactory {
         .collect { firstRow.getCell(it) }
         .collect { it.toString() }
 
-    return new SheetImpl(headerList, rowIter)
+    List<SheetColumnMerger.Field> fieldList = SheetColumnMerger.Factory.create(headerList).merge()
+    return new SheetImpl(fieldList, rowIter)
   }
 
   private void skipHeader(Iterator<Row> rowIter) {
@@ -32,6 +34,7 @@ class SheetFactory {
       }
 
       if (row.rowStyle.borderBottomEnum != BorderStyle.NONE) {
+        // 以下框线为表头边界
         return
       }
     }

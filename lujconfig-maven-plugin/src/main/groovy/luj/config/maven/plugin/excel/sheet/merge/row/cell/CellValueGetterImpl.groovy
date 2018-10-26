@@ -1,4 +1,4 @@
-package luj.config.maven.plugin.excel.sheet.merge.cell
+package luj.config.maven.plugin.excel.sheet.merge.row.cell
 
 import com.google.common.math.DoubleMath
 import groovy.transform.PackageScope

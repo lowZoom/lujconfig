@@ -15,17 +15,17 @@
   <version>0.1-SNAPSHOT</version>
 
   <dependencies>
-    <!--<dependency>-->
-      <!--<groupId>luj.ava</groupId>-->
-      <!--<artifactId>lujava</artifactId>-->
-      <!--<version>0.1-SNAPSHOT</version>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>luj.ava</groupId>
+      <artifactId>lujava</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
 
-    <!--<dependency>-->
-      <!--<groupId>luj.test</groupId>-->
-      <!--<artifactId>lujtest</artifactId>-->
-      <!--<version>0.1-SNAPSHOT</version>-->
-      <!--<scope>test</scope>-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>luj.test</groupId>
+      <artifactId>lujtest</artifactId>
+      <version>0.1-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 </project>

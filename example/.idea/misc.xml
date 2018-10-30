@@ -15,6 +15,8 @@
         <option value="$PROJECT_DIR$/../lujconfig/pom.xml" />
         <option value="$PROJECT_DIR$/../../lujparent/lujparent/pom.xml" />
         <option value="$PROJECT_DIR$/../lujconfig-maven-plugin/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lujava/lujava/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lujtest/lujtest/pom.xml" />
       </list>
     </option>
   </component>

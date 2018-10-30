@@ -3,9 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/example.iml" filepath="$PROJECT_DIR$/.idea/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/luj.lujava.iml" filepath="$PROJECT_DIR$/.idea/luj.lujava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/luj.lujparent.iml" filepath="$PROJECT_DIR$/.idea/luj.lujparent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/luj.lujtest.iml" filepath="$PROJECT_DIR$/.idea/luj.lujtest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lujconfig.iml" filepath="$PROJECT_DIR$/.idea/lujconfig.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/lujconfig-maven-plugin.iml" filepath="$PROJECT_DIR$/.idea/lujconfig-maven-plugin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/lujparent.iml" filepath="$PROJECT_DIR$/.idea/lujparent.iml" />
     </modules>
   </component>
 </project>

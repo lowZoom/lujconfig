@@ -47,11 +47,11 @@ class ConfigCacheLoaderImplTest extends Specification {
     ] as ConfigCacheLoaderImpl.ConfigLine
   }
 
-  interface TestConfig1 {
+  private interface TestConfig1 {
     // NOOP
   }
 
-  interface TestConfig2 {
+  private interface TestConfig2 {
     // NOOP
   }
 }

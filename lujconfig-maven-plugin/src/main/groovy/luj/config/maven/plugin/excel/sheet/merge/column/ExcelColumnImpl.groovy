@@ -1,11 +1,14 @@
 package luj.config.maven.plugin.excel.sheet.merge.column
 
 import groovy.transform.PackageScope
-import luj.groovy.AutoCtor
 
 @PackageScope
-@AutoCtor
 class ExcelColumnImpl implements SheetColumnMergerImpl.ExcelColumn {
+
+  ExcelColumnImpl(String headerStr, int columnIndex) {
+    _headerStr = headerStr
+    _columnIndex = columnIndex
+  }
 
   @Override
   String getGroupName() {
@@ -27,7 +30,7 @@ class ExcelColumnImpl implements SheetColumnMergerImpl.ExcelColumn {
     return _columnIndex
   }
 
-  private String _headerStr
+  private final String _headerStr
 
-  private int _columnIndex
+  private final int _columnIndex
 }

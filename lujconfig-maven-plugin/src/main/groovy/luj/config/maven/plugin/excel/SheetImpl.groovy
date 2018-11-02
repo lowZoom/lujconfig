@@ -3,12 +3,14 @@ package luj.config.maven.plugin.excel
 import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.transform.PackageScope
 import luj.config.maven.plugin.excel.sheet.SheetToMapConverter
-import luj.groovy.AutoCtor
 import org.apache.poi.ss.usermodel.Sheet
 
 @PackageScope
-@AutoCtor
 class SheetImpl implements ExcelReader.Sheet {
+
+  SheetImpl(Sheet sheet) {
+    _sheet = sheet
+  }
 
   @Override
   void writeJsonFile() {
@@ -24,5 +26,5 @@ class SheetImpl implements ExcelReader.Sheet {
         .join('\n'))
   }
 
-  private Sheet _sheet
+  private final Sheet _sheet
 }

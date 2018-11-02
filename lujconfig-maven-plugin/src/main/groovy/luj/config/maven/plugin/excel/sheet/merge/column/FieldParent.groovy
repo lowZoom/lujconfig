@@ -1,11 +1,13 @@
 package luj.config.maven.plugin.excel.sheet.merge.column
 
 import groovy.transform.PackageScope
-import luj.groovy.AutoCtor
 
 @PackageScope
-@AutoCtor
 class FieldParent implements SheetColumnMerger.Field {
+
+  FieldParent(List<SheetColumnMergerImpl.ExcelColumn> group) {
+    _group = group
+  }
 
   @Override
   String getName() {
@@ -27,5 +29,5 @@ class FieldParent implements SheetColumnMerger.Field {
     return "${getName()}"
   }
 
-  private List<SheetColumnMergerImpl.ExcelColumn> _group
+  private final List<SheetColumnMergerImpl.ExcelColumn> _group
 }

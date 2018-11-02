@@ -1,11 +1,14 @@
 package luj.config.maven.plugin.excel.sheet.json
 
 import groovy.transform.PackageScope
-import luj.groovy.AutoCtor
 
 @PackageScope
-@AutoCtor
 class JsonValueMakerImpl implements JsonValueMaker {
+
+  JsonValueMakerImpl(Header header, List rawValueList) {
+    _header = header
+    _rawValueList = rawValueList
+  }
 
   @Override
   List make() {
@@ -32,7 +35,7 @@ class JsonValueMakerImpl implements JsonValueMaker {
     String getFieldName(int index)
   }
 
-  private Header _header
+  private final Header _header
 
-  private List _rawValueList
+  private final List _rawValueList
 }

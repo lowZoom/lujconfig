@@ -1,13 +1,16 @@
 package luj.config.maven.plugin.excel.sheet.merge.row
 
 import groovy.transform.PackageScope
-import luj.groovy.AutoCtor
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.usermodel.Workbook
 
 @PackageScope
-@AutoCtor
 class RowIterImpl implements Iterator<TableRowMergerImpl.Row> {
+
+  RowIterImpl(Iterator<Row> iter, List headerList) {
+    _iter = iter
+    _headerList = headerList
+  }
 
   @Override
   boolean hasNext() {
@@ -24,7 +27,7 @@ class RowIterImpl implements Iterator<TableRowMergerImpl.Row> {
     return new RowImpl(_headerList, poiRow, eval)
   }
 
-  private Iterator<Row> _iter
+  private final Iterator<Row> _iter
 
-  private List _headerList
+  private final List _headerList
 }

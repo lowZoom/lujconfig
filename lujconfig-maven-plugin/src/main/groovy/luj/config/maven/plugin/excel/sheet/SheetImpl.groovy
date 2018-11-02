@@ -3,12 +3,15 @@ package luj.config.maven.plugin.excel.sheet
 import groovy.transform.PackageScope
 import luj.config.maven.plugin.excel.sheet.merge.column.SheetColumnMerger
 import luj.config.maven.plugin.excel.sheet.merge.row.TableRowMerger
-import luj.groovy.AutoCtor
 import org.apache.poi.ss.usermodel.Row
 
 @PackageScope
-@AutoCtor
 class SheetImpl implements SheetToMapConverterImpl.Sheet {
+
+  SheetImpl(List<SheetColumnMerger.Field> headerList, Iterator<Row> dataIter) {
+    _headerList = headerList
+    _dataIter = dataIter
+  }
 
   @Override
   List<SheetToMapConverterImpl.DataRow> getRowList() {
@@ -21,7 +24,7 @@ class SheetImpl implements SheetToMapConverterImpl.Sheet {
     return _headerList.size()
   }
 
-  private List<SheetColumnMerger.Field> _headerList
+  private final List<SheetColumnMerger.Field> _headerList
 
-  private Iterator<Row> _dataIter
+  private final Iterator<Row> _dataIter
 }

@@ -1,11 +1,13 @@
 package luj.config.maven.plugin.excel.sheet
 
 import groovy.transform.PackageScope
-import luj.groovy.AutoCtor
 
 @PackageScope
-@AutoCtor
 class ColumnHeaderImpl implements SheetToMapConverterImpl.ColumnHeader {
+
+  ColumnHeaderImpl(String headerStr) {
+    _headerStr = headerStr
+  }
 
   @Override
   String getName() {
@@ -17,5 +19,5 @@ class ColumnHeaderImpl implements SheetToMapConverterImpl.ColumnHeader {
     return _headerStr.contains('[]')
   }
 
-  private String _headerStr
+  private final String _headerStr
 }

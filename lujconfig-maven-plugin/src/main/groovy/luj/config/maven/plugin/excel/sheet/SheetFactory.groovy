@@ -2,14 +2,16 @@ package luj.config.maven.plugin.excel.sheet
 
 import groovy.transform.PackageScope
 import luj.config.maven.plugin.excel.sheet.merge.column.SheetColumnMerger
-import luj.groovy.AutoCtor
 import org.apache.poi.ss.usermodel.BorderStyle
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.usermodel.Sheet
 
 @PackageScope
-@AutoCtor
 class SheetFactory {
+
+  SheetFactory(Sheet sheet) {
+    _sheet = sheet
+  }
 
   SheetImpl create() {
     def rowIter = _sheet.rowIterator()
@@ -40,5 +42,5 @@ class SheetFactory {
     }
   }
 
-  private Sheet _sheet
+  private final Sheet _sheet
 }

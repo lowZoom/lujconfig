@@ -1,11 +1,13 @@
 package luj.config.maven.plugin.excel.sheet.merge.row
 
 import groovy.transform.PackageScope
-import luj.groovy.AutoCtor
 
 @PackageScope
-@AutoCtor
 class TableRowMergerImpl implements TableRowMerger {
+
+  TableRowMergerImpl(Iterator<Row> rowIter) {
+    _rowIter = rowIter
+  }
 
   @Override
   List merge() {
@@ -87,5 +89,5 @@ class TableRowMergerImpl implements TableRowMerger {
     int countColumn()
   }
 
-  private Iterator<Row> _rowIter
+  private final Iterator<Row> _rowIter
 }

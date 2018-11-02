@@ -1,11 +1,13 @@
 package luj.config.maven.plugin.excel.sheet
 
 import groovy.transform.PackageScope
-import luj.groovy.AutoCtor
 
 @PackageScope
-@AutoCtor
 class SheetToMapConverterImpl implements SheetToMapConverter {
+
+  SheetToMapConverterImpl(Sheet sheet) {
+    _sheet = sheet
+  }
 
   @Override
   List<Map> toMaps() {
@@ -66,5 +68,5 @@ class SheetToMapConverterImpl implements SheetToMapConverter {
     boolean isList()
   }
 
-  private Sheet _sheet
+  private final Sheet _sheet
 }

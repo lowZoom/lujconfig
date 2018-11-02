@@ -1,15 +1,17 @@
 package luj.config.maven.plugin.excel
 
 import groovy.transform.PackageScope
-import luj.groovy.AutoCtor
 
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.stream.Collectors
 
 @PackageScope
-@AutoCtor
 class ExcelCollector {
+
+  ExcelCollector(Path excelRoot) {
+    _excelRoot = excelRoot
+  }
 
   List<String> collect() {
     return Files.walk(_excelRoot)
@@ -19,5 +21,5 @@ class ExcelCollector {
         .collect(Collectors.toList())
   }
 
-  private Path _excelRoot
+  private final Path _excelRoot
 }

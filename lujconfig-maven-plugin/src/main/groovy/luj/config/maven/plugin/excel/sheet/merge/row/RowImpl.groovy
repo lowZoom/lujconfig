@@ -3,7 +3,6 @@ package luj.config.maven.plugin.excel.sheet.merge.row
 import groovy.transform.PackageScope
 import luj.config.maven.plugin.excel.sheet.merge.column.SheetColumnMerger
 import luj.config.maven.plugin.excel.sheet.merge.row.cell.CellValueGetter
-import luj.groovy.AutoCtor
 import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.FormulaEvaluator
 import org.apache.poi.ss.usermodel.Row
@@ -12,8 +11,13 @@ import org.apache.poi.ss.usermodel.Row
  * 对应excel里的一行
  */
 @PackageScope
-@AutoCtor
 class RowImpl implements TableRowMergerImpl.Row {
+  RowImpl(List<SheetColumnMerger.Field> headerList, Row row, FormulaEvaluator formulaEval) {
+    _headerList = headerList
+
+    _row = row
+    _formulaEval = formulaEval
+  }
 
   /**
    * 取出聚合后的一列，一列可能就代表一个复合对象
@@ -44,8 +48,8 @@ class RowImpl implements TableRowMergerImpl.Row {
         .getValue()
   }
 
-  private List<SheetColumnMerger.Field> _headerList
+  private final List<SheetColumnMerger.Field> _headerList
 
-  private Row _row
-  private FormulaEvaluator _formulaEval
+  private final Row _row
+  private final FormulaEvaluator _formulaEval
 }

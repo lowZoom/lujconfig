@@ -2,11 +2,13 @@ package luj.config.maven.plugin.excel.sheet.json
 
 import groovy.transform.PackageScope
 import luj.config.maven.plugin.excel.sheet.merge.column.SheetColumnMerger
-import luj.groovy.AutoCtor
 
 @PackageScope
-@AutoCtor
 class HeaderImpl implements JsonValueMakerImpl.Header {
+
+  HeaderImpl(List<SheetColumnMerger.Field> fieldList) {
+    _fieldList = fieldList
+  }
 
   @Override
   boolean isObjectType() {
@@ -23,5 +25,5 @@ class HeaderImpl implements JsonValueMakerImpl.Header {
     return _fieldList[index].getName()
   }
 
-  private List<SheetColumnMerger.Field> _fieldList
+  private final List<SheetColumnMerger.Field> _fieldList
 }

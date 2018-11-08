@@ -1,5 +1,6 @@
 package luj.config.anno.proc.meta;
 
+import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 import java.io.IOException;
 import luj.generate.annotation.process.type.ProcType;
@@ -13,6 +14,11 @@ final class ConfigDeclarationImpl implements ConfigMetaGeneratorImpl.ConfigDecla
   @Override
   public String getClassName() {
     return _procType.toElement().getSimpleName().toString();
+  }
+
+  @Override
+  public TypeName toTypeName() {
+    return _procType.toTypeName();
   }
 
   @Override

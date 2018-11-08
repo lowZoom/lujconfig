@@ -154,7 +154,7 @@
 
     <testResources>
       <testResource>
-        <directory>${build.testSourceDirectory}/../groovy</directory>
+        <directory>${project.build.testSourceDirectory}/../groovy</directory>
         <excludes>
           <exclude>**/*.groovy</exclude>
         </excludes>

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file://$MODULE_DIR$/../lujconfig/target/classes" />
-    <output-test url="file://$MODULE_DIR$/../lujconfig/target/test-classes" />
-    <content url="file://$MODULE_DIR$/../lujconfig">
-      <sourceFolder url="file://$MODULE_DIR$/../lujconfig/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../lujconfig/src/test/java" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../lujconfig/target" />
+    <output url="file://$MODULE_DIR$/../lujconfig-compiler/target/classes" />
+    <output-test url="file://$MODULE_DIR$/../lujconfig-compiler/target/test-classes" />
+    <content url="file://$MODULE_DIR$/../lujconfig-compiler">
+      <sourceFolder url="file://$MODULE_DIR$/../lujconfig-compiler/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../lujconfig-compiler/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../lujconfig-compiler/src/main/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../lujconfig-compiler/src/test/groovy" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../lujconfig-compiler/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="lujconfig" />
     <orderEntry type="module" module-name="luj.lujava" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:25.1-jre" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.findbugs:jsr305:3.0.2" level="project" />
@@ -21,9 +24,11 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-context:4.3.18.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:4.3.18.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:4.3.18.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.18.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.18.RELEASE" level="project" />
+    <orderEntry type="module" module-name="luj.lujgenerate" />
+    <orderEntry type="library" name="Maven: com.google.auto.service:auto-service:1.0-rc4" level="project" />
+    <orderEntry type="library" name="Maven: com.google.auto:auto-common:0.8" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup:javapoet:1.10.0" level="project" />
     <orderEntry type="module" module-name="luj.lujtest" scope="TEST" />
     <orderEntry type="module" module-name="luj.lugroovy" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.groovy:groovy-all:2.4.15" level="project" />
@@ -35,6 +40,8 @@
     <orderEntry type="library" scope="TEST" name="Maven: net.bytebuddy:byte-buddy-agent:1.8.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.objenesis:objenesis:2.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:4.3.18.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.18.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.spockframework:spock-core:1.1-groovy-2.4" level="project" />
   </component>
 </module>

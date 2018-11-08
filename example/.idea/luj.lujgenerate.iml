@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file://$MODULE_DIR$/../lujconfig/target/classes" />
-    <output-test url="file://$MODULE_DIR$/../lujconfig/target/test-classes" />
-    <content url="file://$MODULE_DIR$/../lujconfig">
-      <sourceFolder url="file://$MODULE_DIR$/../lujconfig/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../lujconfig/src/test/java" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../lujconfig/target" />
+    <output url="file://$MODULE_DIR$/../../lujgenerate/lujgenerate/target/classes" />
+    <output-test url="file://$MODULE_DIR$/../../lujgenerate/lujgenerate/target/test-classes" />
+    <content url="file://$MODULE_DIR$/../../lujgenerate/lujgenerate">
+      <sourceFolder url="file://$MODULE_DIR$/../../lujgenerate/lujgenerate/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../lujgenerate/lujgenerate/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/../../lujgenerate/lujgenerate/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -24,6 +24,9 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.18.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.18.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.google.auto.service:auto-service:1.0-rc4" level="project" />
+    <orderEntry type="library" name="Maven: com.google.auto:auto-common:0.8" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup:javapoet:1.10.0" level="project" />
     <orderEntry type="module" module-name="luj.lujtest" scope="TEST" />
     <orderEntry type="module" module-name="luj.lugroovy" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.groovy:groovy-all:2.4.15" level="project" />

@@ -297,7 +297,6 @@
     <inspection_tool class="FieldMayBeFinal" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="FieldMayBeStatic" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="FieldNamingConvention" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="FinalMethod" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="FinalMethodInFinalClass" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="Finalize" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreTrivialFinalizers" value="true" />
@@ -444,7 +443,7 @@
       <option name="ignoredTypesString" value="java.io.ByteArrayOutputStream,java.io.ByteArrayInputStream,java.io.StringBufferInputStream,java.io.CharArrayWriter,java.io.CharArrayReader,java.io.StringWriter,java.io.StringReader" />
       <option name="insideTryAllowed" value="false" />
     </inspection_tool>
-    <inspection_tool class="IfCanBeAssertion" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="IfCanBeAssertion" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="IfMayBeConditional" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IfStatementWithIdenticalBranches" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IfStatementWithTooManyBranches" enabled="true" level="WARNING" enabled_by_default="true">
@@ -679,7 +678,6 @@
     <inspection_tool class="NotifyWithoutCorrespondingWait" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="NullThrown" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="NumericToString" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="ObjectAllocationInLoop" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ObjectEquality" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_ignoreEnums" value="true" />
       <option name="m_ignoreClassObjects" value="true" />
@@ -770,7 +768,6 @@
       <option name="ignoreInterfaces" value="false" />
     </inspection_tool>
     <inspection_tool class="ProtectedMemberInFinalClass" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="PublicConstructor" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="PublicConstructorInNonPublicClass" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="PublicField" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreEnums" value="false" />
@@ -860,7 +857,7 @@
     <inspection_tool class="Since15" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SingleCharacterStartsWith" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SingleElementAnnotation" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="SingleStatementInBlock" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SingleStatementInBlock" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="Singleton" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SingletonConstructor" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SizeReplaceableByIsEmpty" enabled="true" level="WARNING" enabled_by_default="true" />
@@ -913,7 +910,9 @@
       </option>
     </inspection_tool>
     <inspection_tool class="SuspiciousArrayCast" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="SuspiciousGetterSetter" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SuspiciousGetterSetter" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="onlyWarnWhenFieldPresent" value="true" />
+    </inspection_tool>
     <inspection_tool class="SuspiciousIndentAfterControlStatement" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SuspiciousLiteralUnderscore" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SwitchStatement" enabled="true" level="WARNING" enabled_by_default="true" />

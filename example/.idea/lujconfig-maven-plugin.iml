@@ -12,6 +12,46 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:21.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.11.2" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.10" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-plugin-api:3.3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-model:3.3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-artifact:3.3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.sisu:org.eclipse.sisu.plexus:0.3.2" level="project" />
+    <orderEntry type="library" name="Maven: javax.enterprise:cdi-api:1.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.annotation:jsr250-api:1.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.sisu:org.eclipse.sisu.inject:0.3.2" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-component-annotations:1.5.5" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-classworlds:2.5.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.maven.plugin-tools:maven-plugin-annotations:3.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-project:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-settings:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-profile:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-artifact-manager:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-repository-metadata:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: backport-util-concurrent:backport-util-concurrent:3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven:maven-plugin-registry:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-interpolation:1.11" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-utils:1.5.15" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1" level="project" />
+    <orderEntry type="library" name="Maven: classworlds:classworlds:1.1-alpha-2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven.artifact:maven-artifact:3.0-alpha-1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven.wagon:wagon-provider-api:1.0-beta-3" level="project" />
+    <orderEntry type="library" name="Maven: aspectj:aspectjrt:1.5.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.ant:ant:1.9.13" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.9.13" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml:3.17" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi:3.17" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-collections4:4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml-schemas:3.17" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" level="project" />
+    <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.virtuald:curvesapi:1.04" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy-all:2.4.15" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:21.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.11.2" level="project" />

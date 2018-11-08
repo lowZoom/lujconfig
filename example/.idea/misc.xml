@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="luj.ava.spring.Internal" />
-      <item index="1" class="java.lang.String" itemvalue="org.apache.maven.plugins.annotations.Mojo" />
-      <item index="2" class="java.lang.String" itemvalue="org.springframework.context.annotation.ComponentScan" />
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="com.google.auto.service.AutoService" />
+      <item index="1" class="java.lang.String" itemvalue="luj.ava.spring.Internal" />
+      <item index="2" class="java.lang.String" itemvalue="org.apache.maven.plugins.annotations.Mojo" />
+      <item index="3" class="java.lang.String" itemvalue="org.springframework.context.annotation.ComponentScan" />
     </list>
     <writeAnnotations>
       <writeAnnotation name="org.apache.maven.plugins.annotations.Parameter" />
@@ -17,9 +18,13 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/../lujconfig/pom.xml" />
         <option value="$PROJECT_DIR$/../../lujparent/lujparent/pom.xml" />
-        <option value="$PROJECT_DIR$/../lujconfig-maven-plugin/pom.xml" />
         <option value="$PROJECT_DIR$/../../lujava/lujava/pom.xml" />
         <option value="$PROJECT_DIR$/../../lujtest/lujtest/pom.xml" />
+        <option value="$PROJECT_DIR$/../lujconfig-compiler/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lujgenerate/lujgenerate/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lugparent/lugparent/pom.xml" />
+        <option value="$PROJECT_DIR$/../../lugroovy/lugroovy/pom.xml" />
+        <option value="$PROJECT_DIR$/../lujconfig-maven-plugin/pom.xml" />
       </list>
     </option>
   </component>

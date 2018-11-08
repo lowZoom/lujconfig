@@ -13,11 +13,11 @@ class ExcelCollector {
     _excelRoot = excelRoot
   }
 
-  List<String> collect() {
+  List<Path> collect() {
     return Files.walk(_excelRoot)
         .filter { Files.isRegularFile(it) }
         .filter { !it.fileName.toString().startsWith('~$') }
-        .map { it.toAbsolutePath().toString() }
+        .map { it.toAbsolutePath() }
         .collect(Collectors.toList())
   }
 

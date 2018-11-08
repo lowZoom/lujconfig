@@ -5,11 +5,15 @@ import groovy.transform.PackageScope
 import luj.config.maven.plugin.excel.sheet.SheetToMapConverter
 import org.apache.poi.ss.usermodel.Sheet
 
+import java.nio.file.Files
+import java.nio.file.Path
+
 @PackageScope
 class SheetImpl implements ExcelReader.Sheet {
 
-  SheetImpl(Sheet sheet) {
+  SheetImpl(Sheet sheet, Path excelPath) {
     _sheet = sheet
+    _excelPath = excelPath
   }
 
   @Override
@@ -21,10 +25,22 @@ class SheetImpl implements ExcelReader.Sheet {
     List<Map> jsonList = converter.toMaps()
 
     def jsonEncoder = new ObjectMapper()
-    println(jsonList
-        .collect { jsonEncoder.writeValueAsString(it) }
-        .join('\n'))
+    String fileStr = [
+        '{"header":',
+        '{}',
+        ',"body":[',
+        jsonList.collect { jsonEncoder.writeValueAsString(it) }.join(',\n'),
+        ']}\n',
+    ].join('\n')
+
+    Files.write(getJsonPath(_sheet.sheetName), fileStr.bytes)
+  }
+
+  private Path getJsonPath(String fileName) {
+    return _excelPath.parent.resolveSibling('json').resolve("${fileName}.json")
   }
 
   private final Sheet _sheet
+
+  private final Path _excelPath
 }

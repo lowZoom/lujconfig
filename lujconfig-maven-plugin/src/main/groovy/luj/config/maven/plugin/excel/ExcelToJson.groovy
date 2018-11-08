@@ -21,5 +21,5 @@ class ExcelToJson {
         .each { it.writeJsonFile() }
   }
 
-  private MavenProject _project
+  private final MavenProject _project
 }

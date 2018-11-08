@@ -1,9 +1,11 @@
 package luj.config.anno.proc;
 
 import com.google.auto.service.AutoService;
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import javax.annotation.processing.Processor;
 import luj.config.anno.Config;
+import luj.config.anno.proc.idget.ConfigIdGetGenerator;
 import luj.config.anno.proc.meta.ConfigMetaGenerator;
 import luj.generate.annotation.process.SingleAnnoProc;
 
@@ -16,7 +18,9 @@ public final class ConfigProc extends SingleAnnoProc {
   }
 
   @Override
-  protected void processElement(Context ctx) throws Exception {
+  protected void processElement(Context ctx) throws IOException {
+    ConfigIdGetGenerator.Factory.create(ctx).generate();
+
     ConfigMetaGenerator.Factory.create(ctx).generate();
   }
 }

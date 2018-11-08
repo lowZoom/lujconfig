@@ -21,14 +21,14 @@ final class ConfigMetaGeneratorImpl implements ConfigMetaGenerator {
 
     TypeSpec metaClass = TypeSpec.classBuilder(className + "Meta")
         .addModifiers(Modifier.FINAL)
-        .superclass(getSuperclass())
+        .superclass(getHolderClass())
         .addAnnotation(Component.class)
         .build();
 
     _configDeclaration.writeToFile(metaClass);
   }
 
-  private TypeName getSuperclass() {
+  private TypeName getHolderClass() {
     return ParameterizedTypeName.get(ClassName
         .get(ConfigMetaHolder.class), _configDeclaration.toTypeName());
   }

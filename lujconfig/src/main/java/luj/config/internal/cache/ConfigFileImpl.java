@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.util.List;
 import luj.config.internal.meta.ConfigMeta;
 import org.omg.CORBA.NO_IMPLEMENT;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 final class ConfigFileImpl implements ConfigCacheLoaderImpl.ConfigFile {
 
@@ -25,13 +27,15 @@ final class ConfigFileImpl implements ConfigCacheLoaderImpl.ConfigFile {
 
   @Override
   public void logAbsent() {
-    System.out.println("找不到：" + _configPath);
+    LOG.warn("找不到配置：{}", _configPath);
   }
 
   @Override
   public List<ConfigCacheLoaderImpl.ConfigLine> readLines() {
     throw new NO_IMPLEMENT("readLines尚未实现");
   }
+
+  private static final Logger LOG = LoggerFactory.getLogger(ConfigFileImpl.class);
 
   private final ConfigMeta _configMeta;
 

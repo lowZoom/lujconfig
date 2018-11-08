@@ -13,7 +13,7 @@ final class ConfigCacheLoaderFactoryImpl implements ConfigCacheLoader.Factory {
   @Override
   public ConfigCacheLoader create() {
     List<ConfigCacheLoaderImpl.ConfigFile> fileList = _configMetaCollector.collect().stream()
-        .map(m -> new ConfigFileImpl(m, Paths.get(m.getConfigName())))
+        .map(m -> new ConfigFileImpl(m, Paths.get(m.getConfigName() + ".json").toAbsolutePath()))
         .collect(Collectors.toList());
 
     return new ConfigCacheLoaderImpl(fileList);

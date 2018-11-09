@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../../lugparent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../lugroovy" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../lujava" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../lujgenerate" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../lujparent" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../lujtest" vcs="Git" />
   </component>

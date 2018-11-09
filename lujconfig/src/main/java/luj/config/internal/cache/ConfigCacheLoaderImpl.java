@@ -1,5 +1,6 @@
 package luj.config.internal.cache;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,8 +25,13 @@ final class ConfigCacheLoaderImpl implements ConfigCacheLoader {
   }
 
   private Map<String, Object> toIdMap(ConfigFile file) {
-    return file.readLines().stream()
-        .collect(Collectors.toMap(ConfigLine::getId, ConfigLine::getValue));
+    try {
+      return file.readLines().stream()
+          .collect(Collectors.toMap(ConfigLine::getId, ConfigLine::getValue));
+
+    } catch (IOException e) {
+      throw new UnsupportedOperationException(e);
+    }
   }
 
   interface ConfigFile {
@@ -36,7 +42,7 @@ final class ConfigCacheLoaderImpl implements ConfigCacheLoader {
 
     void logAbsent();
 
-    List<ConfigLine> readLines();
+    List<ConfigLine> readLines() throws IOException;
   }
 
   interface ConfigLine {

@@ -24,6 +24,9 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.18.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:4.3.18.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.11.2" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.10" level="project" />
     <orderEntry type="module" module-name="lujconfig-compiler" scope="PROVIDED" />
     <orderEntry type="module" module-name="luj.lujgenerate" scope="PROVIDED" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.auto.service:auto-service:1.0-rc4" level="project" />

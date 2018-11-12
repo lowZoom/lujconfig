@@ -14,11 +14,24 @@ class ExcelToJson {
   void execute() {
     Path excelRoot = Paths.get(_project.basedir.absolutePath, 'dat', 'excel')
 
-    new ExcelCollector(excelRoot).collect()
-        .collect { new ExcelReader(it).read() }
-        .flatten()
-        .collect { it as ExcelReader.Sheet }
-        .each { it.writeJsonFile() }
+    Path outputRoot = excelRoot.resolveSibling('json')
+    cleanOutput(outputRoot.toString())
+
+    new ExcelCollector(excelRoot).collect().each {
+      new ExcelReader(it, outputRoot).read().each {
+        it.writeJsonFile()
+      }
+    }
+  }
+
+  private void cleanOutput(String outputPath) {
+    new AntBuilder().with {
+      mkdir(dir: outputPath)
+
+      delete(includeemptydirs: true, verbose: true) {
+        fileset(dir: outputPath, includes: '**/*')
+      }
+    }
   }
 
   private final MavenProject _project

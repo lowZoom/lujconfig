@@ -2,6 +2,7 @@ package luj.config.maven.plugin.excel
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.transform.PackageScope
+import luj.config.maven.plugin.excel.sheet.output.SheetOutputNameResolver
 import luj.config.maven.plugin.excel.sheet.tomap.SheetToMapConverter
 import org.apache.poi.ss.usermodel.Sheet
 
@@ -11,9 +12,11 @@ import java.nio.file.Path
 @PackageScope
 class SheetImpl implements ExcelReader.Sheet {
 
-  SheetImpl(Sheet sheet, Path outputPath) {
+  SheetImpl(Sheet sheet, Path outputPath, SheetOutputNameResolver outputNameResolver) {
     _sheet = sheet
+
     _outputPath = outputPath
+    _outputNameResolver = outputNameResolver
   }
 
   @Override
@@ -33,14 +36,15 @@ class SheetImpl implements ExcelReader.Sheet {
         ']}\n',
     ].join('\n')
 
-    Files.write(getJsonPath(_sheet.sheetName), fileStr.bytes)
+    Files.write(getJsonPath(), fileStr.bytes)
   }
 
-  private Path getJsonPath(String fileName) {
-    return _outputPath.resolve("${fileName}.json")
+  private Path getJsonPath() {
+    return _outputPath.resolve(_outputNameResolver.resolve())
   }
 
   private final Sheet _sheet
 
   private final Path _outputPath
+  private final SheetOutputNameResolver _outputNameResolver
 }

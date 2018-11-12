@@ -1,4 +1,4 @@
-package luj.config.internal.file.json
+package luj.config.internal.json.file
 
 import spock.lang.Specification
 

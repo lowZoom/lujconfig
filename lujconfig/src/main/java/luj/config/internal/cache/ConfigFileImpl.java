@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import luj.config.internal.json.file.ConfigBodyReader;
+import luj.config.internal.json.parse.LineJsonParser;
 import luj.config.internal.meta.ConfigMeta;
-import org.omg.CORBA.NO_IMPLEMENT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,11 +37,19 @@ final class ConfigFileImpl implements ConfigCacheLoaderImpl.ConfigFile {
   @Override
   public List<ConfigCacheLoaderImpl.ConfigLine> readLines() throws IOException {
     try (Stream<String> lines = Files.lines(_configPath)) {
-      throw new NO_IMPLEMENT("readLines尚未实现");
+      return ConfigBodyReader.Factory.create(lines).read()
+          .map(this::createLine)
+          .collect(Collectors.toList());
+    }
+  }
 
-      //return ConfigBodyReader.Factory.create(lines).read()
-      //    .map(l -> new ConfigLineImpl(, _configMeta))
-      //    .collect(Collectors.toList());
+  private ConfigLineImpl createLine(String lineStr) {
+    try {
+      Object configInstance = LineJsonParser.Factory.create(lineStr, _configMeta).parse();
+      return new ConfigLineImpl(configInstance, _configMeta);
+
+    } catch (IOException | IllegalAccessException e) {
+      throw new UnsupportedOperationException(e);
     }
   }
 

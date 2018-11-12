@@ -6,5 +6,7 @@ public interface ConfigMeta {
 
   String getConfigName();
 
+  Object createConfigInstance();
+
   String getConfigId(Object config);
 }

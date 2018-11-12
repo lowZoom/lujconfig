@@ -19,11 +19,11 @@ final class ConfigIdGetGeneratorImpl implements ConfigIdGetGenerator {
 
   @Override
   public void generate() throws IOException {
-    String configType = _procType.toElement().getSimpleName().toString();
+    String configName = _procType.toElement().getSimpleName().toString();
 
-    TypeSpec getterClass = TypeSpec.classBuilder(configType + "IdGet")
+    TypeSpec getterClass = TypeSpec.classBuilder(configName + "IdGet")
         .addModifiers(Modifier.FINAL)
-        .addSuperinterface(getGetterClass())
+        .addSuperinterface(getGetterInterface())
         .addAnnotation(Component.class)
         .addMethod(makeGetId())
         .build();
@@ -31,7 +31,7 @@ final class ConfigIdGetGeneratorImpl implements ConfigIdGetGenerator {
     _procType.getPackage().writeToFile(getterClass);
   }
 
-  private TypeName getGetterClass() {
+  private TypeName getGetterInterface() {
     return ParameterizedTypeName.get(ClassName.get(ConfigIdGetter.class), _procType.toTypeName());
   }
 

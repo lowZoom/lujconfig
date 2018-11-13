@@ -31,7 +31,7 @@ final class ConfigFileImpl implements ConfigCacheLoaderImpl.ConfigFile {
 
   @Override
   public void logAbsent() {
-    LOG.warn("找不到配置：{}", _configPath);
+    LOG.warn("找不到配置：{}（{}）", _configPath, _configMeta.getConfigType().getSimpleName());
   }
 
   @Override

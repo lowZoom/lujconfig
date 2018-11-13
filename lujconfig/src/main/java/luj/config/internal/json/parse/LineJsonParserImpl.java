@@ -33,7 +33,7 @@ final class LineJsonParserImpl implements LineJsonParser {
         .collect(Collectors.toList());
 
     for (Field field : fieldList) {
-      jsonToField(field, configInstance, rootNode);
+      jsonToField(rootNode, field, configInstance);
     }
 
     return configInstance;
@@ -52,7 +52,8 @@ final class LineJsonParserImpl implements LineJsonParser {
     }
   }
 
-  private void jsonToField(Field field, Object configInstance, JsonNode json) throws IllegalAccessException {
+  private void jsonToField(JsonNode json, Field field, Object configInstance)
+      throws IllegalAccessException {
     String fieldName = field.getName();
     JsonNode fieldNode = json.findValue(fieldName);
 
@@ -64,7 +65,7 @@ final class LineJsonParserImpl implements LineJsonParser {
     Class<?> fieldType = field.getType();
     FieldValueSetter valueSetter = ValueFieldFactory.getInstance().create(fieldType);
     checkNotNull(valueSetter, fieldType.getName());
-    valueSetter.fromJson(new FieldHolder(field, configInstance, fieldNode, valueSetter));
+    valueSetter.setValue(new ContextImpl(field, configInstance, fieldNode));
 
     if (inaccessible) {
       field.setAccessible(false);

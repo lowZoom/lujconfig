@@ -3,7 +3,7 @@ package luj.config.example.business.m03.config;
 import java.util.List;
 import luj.config.anno.Config;
 
-@Config("Sheet1")
+@Config("场景.场景")
 public interface SceneCfg {
 
   String id();

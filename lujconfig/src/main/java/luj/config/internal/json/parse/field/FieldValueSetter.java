@@ -14,5 +14,5 @@ public interface FieldValueSetter {
     JsonNode getJsonNode();
   }
 
-  void fromJson(Context ctx) throws IllegalAccessException;
+  void setValue(Context ctx) throws IllegalAccessException;
 }

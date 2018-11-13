@@ -6,7 +6,7 @@ enum FieldList implements FieldValueSetter {
   SINGLETON;
 
   @Override
-  public void fromJson(Context ctx) throws IllegalAccessException {
+  public void setValue(Context ctx) throws IllegalAccessException {
     ctx.getField().set(ctx.getObject(), ImmutableList.of());
   }
 }

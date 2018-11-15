@@ -1,8 +1,8 @@
-package luj.config.internal.cache;
+package luj.config.internal.cache.value;
 
 import luj.config.internal.meta.ConfigMeta;
 
-final class ConfigLineImpl implements ConfigCacheLoaderImpl.ConfigLine {
+final class ConfigLineImpl implements ConfigValueMapLoaderImpl.ConfigLine {
 
   ConfigLineImpl(Object configImpl, ConfigMeta configMeta) {
     _configImpl = configImpl;
@@ -15,7 +15,7 @@ final class ConfigLineImpl implements ConfigCacheLoaderImpl.ConfigLine {
   }
 
   @Override
-  public Object getValue() {
+  public Object getInstance() {
     return _configImpl;
   }
 

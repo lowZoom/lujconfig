@@ -2,11 +2,11 @@ package luj.config.internal.json.parse.field;
 
 import java.util.List;
 
-enum ValueFieldFactoryImpl implements ValueFieldFactory {
+enum FieldValueHandlerFactoryImpl implements FieldValueHandlerFactory {
   SINGLETON;
 
   @Override
-  public FieldValueSetter create(Class<?> fieldType) {
+  public FieldValueHandler create(Class<?> fieldType) {
     if (fieldType == String.class) {
       return FieldString.SINGLETON;
     }

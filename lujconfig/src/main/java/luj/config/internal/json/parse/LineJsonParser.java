@@ -1,6 +1,8 @@
 package luj.config.internal.json.parse;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.List;
 import luj.config.internal.meta.ConfigMeta;
 
 public interface LineJsonParser {
@@ -12,5 +14,19 @@ public interface LineJsonParser {
     }
   }
 
-  Object parse() throws IOException, IllegalAccessException;
+  interface Result {
+
+    Object getConfigInstance();
+
+    List<LinkableField> getLinkableList();
+  }
+
+  interface LinkableField {
+
+    Field getField();
+
+    List<String> getIdList();
+  }
+
+  Result parse() throws IOException, IllegalAccessException;
 }

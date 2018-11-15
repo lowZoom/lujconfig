@@ -1,4 +1,4 @@
-package luj.config.internal.cache;
+package luj.config.internal.cache.value;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +12,7 @@ import luj.config.internal.meta.ConfigMeta;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-final class ConfigFileImpl implements ConfigCacheLoaderImpl.ConfigFile {
+final class ConfigFileImpl implements ConfigValueMapLoaderImpl.ConfigFile {
 
   ConfigFileImpl(ConfigMeta configMeta, Path configPath) {
     _configMeta = configMeta;
@@ -35,7 +35,7 @@ final class ConfigFileImpl implements ConfigCacheLoaderImpl.ConfigFile {
   }
 
   @Override
-  public List<ConfigCacheLoaderImpl.ConfigLine> readLines() throws IOException {
+  public List<ConfigValueMapLoaderImpl.ConfigLine> readLines() throws IOException {
     try (Stream<String> lines = Files.lines(_configPath)) {
       return ConfigBodyReader.Factory.create(lines).read()
           .map(this::createLine)

@@ -10,7 +10,7 @@ class LineJsonParserImplTest extends Specification {
     // NOOP
   }
 
-  def "Parse:"() {
+  def "Parse:没关联id"() {
     given:
     _jsonStr = /{"id":101, "name":"名"}/
 
@@ -18,12 +18,29 @@ class LineJsonParserImplTest extends Specification {
     def result = parse()
 
     then:
-    result.id() == '101'
-    result.name() == '名'
-    result.list().isEmpty()
+    def instance = result.configInstance as TestCfg
+    instance.id() == '101'
+    instance.name() == '名'
+    instance.list().isEmpty()
+
+    result.linkableList.isEmpty()
   }
 
-  TestCfg parse() {
+  def "Parse:有关联id"() {
+    given:
+    _jsonStr = /{"list":[101,102]}/
+
+    when:
+    def result = parse()
+
+    then:
+    result.configInstance instanceof TestCfg
+    linkable(result) == [
+        ['list', ['101', '102']],
+    ]
+  }
+
+  LineJsonParser.Result parse() {
     return new LineJsonParserImpl(_jsonStr, mockConfig()).parse()
   }
 
@@ -32,6 +49,10 @@ class LineJsonParserImplTest extends Specification {
         getConfigInterface: { TestCfg },
         createInstance    : { new TestCfgImpl() },
     ] as LineJsonParserImpl.Config
+  }
+
+  def linkable(LineJsonParser.Result result) {
+    return result.linkableList.collect { [it.field.name, it.idList] }
   }
 
   private interface TestCfg {

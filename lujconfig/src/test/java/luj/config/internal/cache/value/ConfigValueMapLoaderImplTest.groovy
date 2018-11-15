@@ -1,8 +1,8 @@
-package luj.config.internal.cache
+package luj.config.internal.cache.value
 
 import spock.lang.Specification
 
-class ConfigCacheLoaderImplTest extends Specification {
+class ConfigValueMapLoaderImplTest extends Specification {
 
   List _fileList
   List _output
@@ -22,12 +22,12 @@ class ConfigCacheLoaderImplTest extends Specification {
     def result = load()
 
     then:
-    result.get(TestConfig1, '101') == [id: '101']
+    result.get(TestConfig1, '101').configInstance == [id: '101']
     _output == ['TestConfig2.logAbsent']
   }
 
-  ConfigCache load() {
-    return new ConfigCacheLoaderImpl(_fileList.collect { mockFile(it) }).load()
+  ConfigValueMapLoader.ValueMap load() {
+    return new ConfigValueMapLoaderImpl(_fileList.collect { mockFile(it) }).load()
   }
 
   def mockFile(List value) {
@@ -37,14 +37,14 @@ class ConfigCacheLoaderImplTest extends Specification {
         isAbsent     : { !value[1] },
         logAbsent    : { _output << "${configType.simpleName}.logAbsent" },
         readLines    : { value[1].collect { mockLine(it) } },
-    ] as ConfigCacheLoaderImpl.ConfigFile
+    ] as ConfigValueMapLoaderImpl.ConfigFile
   }
 
   def mockLine(Map value) {
     return [
-        getId   : { value['id'] },
-        getValue: { value },
-    ] as ConfigCacheLoaderImpl.ConfigLine
+        getId      : { value['id'] },
+        getInstance: { value },
+    ] as ConfigValueMapLoaderImpl.ConfigLine
   }
 
   private interface TestConfig1 {

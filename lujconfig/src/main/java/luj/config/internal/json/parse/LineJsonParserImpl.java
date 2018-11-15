@@ -7,12 +7,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import luj.config.internal.json.parse.field.FieldValueSetter;
-import luj.config.internal.json.parse.field.ValueFieldFactory;
+import luj.config.internal.json.parse.field.FieldValueHandler;
+import luj.config.internal.json.parse.field.FieldValueHandlerFactory;
 
 final class LineJsonParserImpl implements LineJsonParser {
 
@@ -22,7 +23,7 @@ final class LineJsonParserImpl implements LineJsonParser {
   }
 
   @Override
-  public Object parse() throws IOException, IllegalAccessException {
+  public Result parse() throws IOException, IllegalAccessException {
     Object configInstance = _config.createInstance();
     Class<?> implType = configInstance.getClass();
     JsonNode rootNode = JACKSON.readTree(_jsonStr);
@@ -32,11 +33,12 @@ final class LineJsonParserImpl implements LineJsonParser {
         .map(n -> getField(implType, n))
         .collect(Collectors.toList());
 
+    List<LinkableField> linkableList = new ArrayList<>();
     for (Field field : fieldList) {
-      jsonToField(rootNode, field, configInstance);
+      jsonToField(rootNode, field, configInstance, linkableList);
     }
 
-    return configInstance;
+    return new ResultImpl(configInstance, linkableList);
   }
 
   private Stream<Method> getterStream() {
@@ -52,8 +54,8 @@ final class LineJsonParserImpl implements LineJsonParser {
     }
   }
 
-  private void jsonToField(JsonNode json, Field field, Object configInstance)
-      throws IllegalAccessException {
+  private void jsonToField(JsonNode json, Field field, Object configInstance,
+      List<LinkableField> linkableList) throws IllegalAccessException {
     String fieldName = field.getName();
     JsonNode fieldNode = json.findValue(fieldName);
 
@@ -63,9 +65,12 @@ final class LineJsonParserImpl implements LineJsonParser {
     }
 
     Class<?> fieldType = field.getType();
-    FieldValueSetter valueSetter = ValueFieldFactory.getInstance().create(fieldType);
+    FieldValueHandler valueSetter = FieldValueHandlerFactory.getInstance().create(fieldType);
     checkNotNull(valueSetter, fieldType.getName());
-    valueSetter.setValue(new ContextImpl(field, configInstance, fieldNode));
+
+    //TODO: 不只是把值设置进字段里，要把需要后续处理的数据打包带出来
+    ContextImpl ctx = new ContextImpl(field, configInstance, fieldNode, linkableList);
+    valueSetter.handle(ctx);
 
     if (inaccessible) {
       field.setAccessible(false);

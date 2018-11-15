@@ -1,57 +1,24 @@
 package luj.config.internal.cache;
 
-import static com.google.common.collect.ImmutableMap.toImmutableMap;
-
-import java.io.IOException;
-import java.util.List;
 import java.util.Map;
+import luj.config.internal.cache.value.ConfigValueMapLoader;
 
 final class ConfigCacheLoaderImpl implements ConfigCacheLoader {
 
-  ConfigCacheLoaderImpl(List<ConfigFile> fileList) {
-    _fileList = fileList;
+  ConfigCacheLoaderImpl(ConfigValueMapLoader valueMapLoader) {
+    _valueMapLoader = valueMapLoader;
   }
 
   @Override
   public ConfigCache load() {
-    _fileList.stream()
-        .filter(ConfigFile::isAbsent)
-        .forEach(ConfigFile::logAbsent);
+    ConfigValueMapLoader.ValueMap valueMap = _valueMapLoader.load();
 
-    Map<Class<?>, Map<String, Object>> cacheMap = _fileList.stream()
-        .filter(f -> !f.isAbsent())
-        .collect(toImmutableMap(ConfigFile::getConfigType, this::toIdMap));
+    //TODO: 展开其他配置对象关联
+
+    Map<Class<?>, Map<String, Object>> cacheMap = null;
 
     return new ConfigCacheImpl(cacheMap);
   }
 
-  private Map<String, Object> toIdMap(ConfigFile file) {
-    try {
-      return file.readLines().stream()
-          .collect(toImmutableMap(ConfigLine::getId, ConfigLine::getValue));
-
-    } catch (IOException e) {
-      throw new UnsupportedOperationException(e);
-    }
-  }
-
-  interface ConfigFile {
-
-    Class<?> getConfigType();
-
-    boolean isAbsent();
-
-    void logAbsent();
-
-    List<ConfigLine> readLines() throws IOException;
-  }
-
-  interface ConfigLine {
-
-    String getId();
-
-    Object getValue();
-  }
-
-  private final List<ConfigFile> _fileList;
+  private final ConfigValueMapLoader _valueMapLoader;
 }

@@ -3,7 +3,7 @@ package luj.config.internal.json.parse.field;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.lang.reflect.Field;
 
-public interface FieldValueSetter {
+public interface FieldValueHandler {
 
   interface Context {
 
@@ -12,7 +12,9 @@ public interface FieldValueSetter {
     Object getObject();
 
     JsonNode getJsonNode();
+
+    void markLinkable();
   }
 
-  void setValue(Context ctx) throws IllegalAccessException;
+  void handle(Context ctx) throws IllegalAccessException;
 }

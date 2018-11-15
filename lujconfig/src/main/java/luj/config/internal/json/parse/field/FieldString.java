@@ -1,11 +1,23 @@
 package luj.config.internal.json.parse.field;
 
-enum FieldString implements FieldValueSetter {
+import com.fasterxml.jackson.databind.JsonNode;
+import java.lang.reflect.Field;
+
+enum FieldString implements FieldValueHandler {
   SINGLETON;
 
   @Override
-  public void setValue(Context ctx) throws IllegalAccessException {
-    String value = ctx.getJsonNode().asText();
-    ctx.getField().set(ctx.getObject(), value);
+  public void handle(Context ctx) throws IllegalAccessException {
+    Field field = ctx.getField();
+    Object configInstance = ctx.getObject();
+
+    JsonNode jsonNode = ctx.getJsonNode();
+    if (jsonNode == null) {
+      field.set(configInstance, "");
+      return;
+    }
+
+    String value = jsonNode.asText();
+    field.set(configInstance, value);
   }
 }

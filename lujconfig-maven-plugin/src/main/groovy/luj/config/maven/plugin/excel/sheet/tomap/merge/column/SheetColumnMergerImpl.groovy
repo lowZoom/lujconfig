@@ -20,6 +20,9 @@ class SheetColumnMergerImpl implements SheetColumnMerger {
       groupList.add(lastGroup)
       lastGroup = nextGroup
     }
+    if (lastGroup) {
+      groupList.add(lastGroup)
+    }
 
     return groupList.collect { createField(it) }
   }

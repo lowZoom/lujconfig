@@ -10,7 +10,6 @@ final class ConfigCacheLoaderFactoryImpl implements ConfigCacheLoader.Factory {
   @Override
   public ConfigCacheLoader create() {
     ConfigValueMapLoader valueMapLoader = _valueMapLoaderFactory.create();
-
     return new ConfigCacheLoaderImpl(valueMapLoader);
   }
 

@@ -1,10 +1,7 @@
 package luj.config.internal.json.parse;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.collect.ImmutableList;
 import java.lang.reflect.Field;
-import java.util.List;
-import java.util.stream.Collectors;
 
 final class LinkableFieldImpl implements LineJsonParser.LinkableField {
 
@@ -19,10 +16,8 @@ final class LinkableFieldImpl implements LineJsonParser.LinkableField {
   }
 
   @Override
-  public List<String> getIdList() {
-    return ImmutableList.copyOf(_jsonNode.iterator()).stream()
-        .map(JsonNode::asText)
-        .collect(Collectors.toList());
+  public JsonNode getJsonValue() {
+    return _jsonNode;
   }
 
   private final Field _field;

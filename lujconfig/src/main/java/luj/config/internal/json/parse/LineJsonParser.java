@@ -1,5 +1,6 @@
 package luj.config.internal.json.parse;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
@@ -25,7 +26,7 @@ public interface LineJsonParser {
 
     Field getField();
 
-    List<String> getIdList();
+    JsonNode getJsonValue();
   }
 
   Result parse() throws IOException, IllegalAccessException;

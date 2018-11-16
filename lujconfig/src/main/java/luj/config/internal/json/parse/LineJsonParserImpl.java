@@ -47,7 +47,9 @@ final class LineJsonParserImpl implements LineJsonParser {
 
   private Field getField(Class<?> implType, String fieldName) {
     try {
-      return implType.getDeclaredField(fieldName);
+      Field field = implType.getDeclaredField(fieldName);
+      field.setAccessible(true);
+      return field;
 
     } catch (NoSuchFieldException e) {
       throw new UnsupportedOperationException(e);
@@ -59,22 +61,12 @@ final class LineJsonParserImpl implements LineJsonParser {
     String fieldName = field.getName();
     JsonNode fieldNode = json.findValue(fieldName);
 
-    boolean inaccessible = !field.isAccessible();
-    if (inaccessible) {
-      field.setAccessible(true);
-    }
-
     Class<?> fieldType = field.getType();
     FieldValueHandler valueSetter = FieldValueHandlerFactory.getInstance().create(fieldType);
     checkNotNull(valueSetter, fieldType.getName());
 
-    //TODO: 不只是把值设置进字段里，要把需要后续处理的数据打包带出来
     ContextImpl ctx = new ContextImpl(field, configInstance, fieldNode, linkableList);
     valueSetter.handle(ctx);
-
-    if (inaccessible) {
-      field.setAccessible(false);
-    }
   }
 
   interface Config {

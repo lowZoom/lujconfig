@@ -45,8 +45,10 @@ final class ConfigFileImpl implements ConfigValueMapLoaderImpl.ConfigFile {
 
   private ConfigLineImpl createLine(String lineStr) {
     try {
-      Object configInstance = LineJsonParser.Factory.create(lineStr, _configMeta).parse();
-      return new ConfigLineImpl(configInstance, _configMeta);
+      LineJsonParser parser = LineJsonParser.Factory.create(lineStr, _configMeta);
+      LineJsonParser.Result parseResult = parser.parse();
+
+      return new ConfigLineImpl(parseResult, _configMeta);
 
     } catch (IOException | IllegalAccessException e) {
       throw new UnsupportedOperationException(e);

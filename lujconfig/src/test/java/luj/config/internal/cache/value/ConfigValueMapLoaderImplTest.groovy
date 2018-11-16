@@ -22,29 +22,36 @@ class ConfigValueMapLoaderImplTest extends Specification {
     def result = load()
 
     then:
-    result.get(TestConfig1, '101').configInstance == [id: '101']
+    ConfigValueMapLoader.Value value = result[TestConfig1]['101']
+    value.configInstance == [id: '101']
+
+    value.getLinkableList().isEmpty()
+    value.getParentMap().is(result)
+
     _output == ['TestConfig2.logAbsent']
   }
 
-  ConfigValueMapLoader.ValueMap load() {
+  Map load() {
     return new ConfigValueMapLoaderImpl(_fileList.collect { mockFile(it) }).load()
   }
 
   def mockFile(List value) {
+    def stub = Stub(ConfigValueMapLoaderImpl.ConfigFile)
     def configType = value[0] as Class
-    return [
-        getConfigType: { configType },
-        isAbsent     : { !value[1] },
-        logAbsent    : { _output << "${configType.simpleName}.logAbsent" },
-        readLines    : { value[1].collect { mockLine(it) } },
-    ] as ConfigValueMapLoaderImpl.ConfigFile
+
+    stub.getConfigType() >> { configType }
+    stub.isAbsent() >> { !value[1] }
+    stub.logAbsent() >> { _output << "${configType.simpleName}.logAbsent" }
+    stub.readLines() >> { value[1].collect { mockLine(it) } }
+
+    return stub
   }
 
   def mockLine(Map value) {
-    return [
-        getId      : { value['id'] },
-        getInstance: { value },
-    ] as ConfigValueMapLoaderImpl.ConfigLine
+    def stub = Stub(ConfigValueMapLoaderImpl.ConfigLine)
+    stub.getId() >> { value['id'] }
+    stub.getInstance() >> { value }
+    return stub
   }
 
   private interface TestConfig1 {

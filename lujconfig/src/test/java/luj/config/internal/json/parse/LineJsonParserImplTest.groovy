@@ -36,7 +36,7 @@ class LineJsonParserImplTest extends Specification {
     then:
     result.configInstance instanceof TestCfg
     linkable(result) == [
-        ['list', ['101', '102']],
+        ['list', '[101,102]'],
     ]
   }
 
@@ -45,14 +45,14 @@ class LineJsonParserImplTest extends Specification {
   }
 
   def mockConfig() {
-    return [
-        getConfigInterface: { TestCfg },
-        createInstance    : { new TestCfgImpl() },
-    ] as LineJsonParserImpl.Config
+    def stub = Stub(LineJsonParserImpl.Config)
+    stub.getConfigInterface() >> { TestCfg }
+    stub.createInstance() >> { new TestCfgImpl() }
+    return stub
   }
 
   def linkable(LineJsonParser.Result result) {
-    return result.linkableList.collect { [it.field.name, it.idList] }
+    return result.linkableList.collect { [it.field.name, it.jsonValue.toString()] }
   }
 
   private interface TestCfg {

@@ -1,15 +1,17 @@
 package luj.config.internal.cache.link;
 
 import java.util.Map;
-import org.omg.CORBA.NO_IMPLEMENT;
+import luj.config.internal.cache.value.ConfigValueMapLoader;
 
 public interface ConfigInstanceLinker {
 
   interface Factory {
 
-    static ConfigInstanceLinker create() {
-      throw new NO_IMPLEMENT("create尚未实现");
+    static Factory getInstance() {
+      return ConfigInstanceLinkerFactoryImpl.SINGLETON;
     }
+
+    ConfigInstanceLinker create(Map<Class<?>, Map<String, ConfigValueMapLoader.Value>> valueMap);
   }
 
   Map<Class<?>, Map<String, Object>> link();

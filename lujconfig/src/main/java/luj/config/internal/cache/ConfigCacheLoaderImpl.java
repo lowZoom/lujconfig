@@ -1,6 +1,7 @@
 package luj.config.internal.cache;
 
 import java.util.Map;
+import luj.config.internal.cache.link.ConfigInstanceLinker;
 import luj.config.internal.cache.value.ConfigValueMapLoader;
 
 final class ConfigCacheLoaderImpl implements ConfigCacheLoader {
@@ -11,12 +12,12 @@ final class ConfigCacheLoaderImpl implements ConfigCacheLoader {
 
   @Override
   public ConfigCache load() {
-    ConfigValueMapLoader.ValueMap valueMap = _valueMapLoader.load();
+    Map<Class<?>, Map<String, ConfigValueMapLoader.Value>> valueMap = _valueMapLoader.load();
 
-    //TODO: 展开其他配置对象关联
+    ConfigInstanceLinker.Factory linkerFactory = ConfigInstanceLinker.Factory.getInstance();
+    ConfigInstanceLinker linker = linkerFactory.create(valueMap);
 
-    Map<Class<?>, Map<String, Object>> cacheMap = null;
-
+    Map<Class<?>, Map<String, Object>> cacheMap = linker.link();
     return new ConfigCacheImpl(cacheMap);
   }
 

@@ -1,13 +1,13 @@
 package luj.config.ex.internal.generate.extract.row;
 
-import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
-import luj.config.ex.internal.generate.extract.error.InvalidValueException;
+import luj.config.ex.api.extract.exception.InvalidValueException;
+import luj.config.ex.api.extract.exception.RedundantColumnException;
 import luj.config.ex.internal.generate.extract.header.HeaderExtractInvoker;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -40,7 +40,10 @@ public class DataRowExtractor {
 
     int headerColCount = beginCol + columnList.size();
     int dataColCount = row.getLastCellNum();
-    checkState(dataColCount <= headerColCount, dataColCount);
+    if (dataColCount > headerColCount) {
+      throw new RedundantColumnException(_bookPath,
+          _poiSheet.getSheetName(), headerColCount, dataColCount);
+    }
 
     return IntStream.range(beginCol, dataColCount)
         .mapToObj(i -> makeField(row, i, columnList.get(i - beginCol)))

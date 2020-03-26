@@ -1,4 +1,4 @@
-package luj.config.ex.internal.generate.extract.error;
+package luj.config.ex.api.extract.exception;
 
 import java.nio.file.Path;
 import org.apache.poi.ss.util.CellAddress;
@@ -21,13 +21,13 @@ public class InvalidValueException extends RuntimeException {
     return _sheet;
   }
 
-  public int getRow() {
-    return _address.getRow() + 1;
-  }
-
-  public int getColumn() {
-    return _address.getColumn() + 1;
-  }
+//  public int getRow() {
+//    return _address.getRow() + 1;
+//  }
+//
+//  public int getColumn() {
+//    return _address.getColumn() + 1;
+//  }
 
   public String getAddress() {
     return _address.toString();

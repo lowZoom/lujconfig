@@ -1,4 +1,4 @@
-package luj.config.ex.internal.generate.header;
+package luj.config.ex.internal.generate.extract.header;
 
 import luj.config.ex.api.extract.ConfigHeaderExtractor;
 import org.apache.poi.ss.usermodel.Sheet;

@@ -5,6 +5,8 @@ public interface ConfigHeaderExtractor {
   interface Context {
 
     Sheet getSheet();
+
+    Return returnHeader();
   }
 
   interface Sheet {
@@ -12,5 +14,12 @@ public interface ConfigHeaderExtractor {
     String getName();
   }
 
-  void onExtract(Context ctx);
+  interface Return {
+
+    Return dataBeginColumn(int val);
+
+    Return dataBeginRow(int val);
+  }
+
+  Return onExtract(Context ctx);
 }

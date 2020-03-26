@@ -7,9 +7,16 @@ import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.Map;
 import luj.config.ex.api.extract.ConfigHeaderExtractor;
-import luj.config.ex.internal.generate.header.HeaderExtractInvoker;
+import luj.config.ex.api.extract.HeaderColumnExtractor;
+import luj.config.ex.internal.generate.extract.header.HeaderExtractInvoker;
+import luj.config.ex.internal.generate.extract.row.DataRowExtractor;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.openxml4j.opc.PackageAccess;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 final class ExcelDataExtractor {
 
@@ -19,12 +26,18 @@ final class ExcelDataExtractor {
   }
 
   public void extract() {
-    try (XSSFWorkbook workbook = new XSSFWorkbook(_excelPath.toString())) {
+    LOG.debug("{}", _excelPath);
+
+    try (XSSFWorkbook workbook = openExcel(_excelPath)) {
       extractBook(workbook);
 
-    } catch (IOException e) {
+    } catch (IOException | InvalidFormatException e) {
       throw new UnsupportedOperationException(e);
     }
+  }
+
+  private XSSFWorkbook openExcel(Path path) throws IOException, InvalidFormatException {
+    return new XSSFWorkbook(OPCPackage.open(path.toString(), PackageAccess.READ));
   }
 
   private void extractBook(XSSFWorkbook book) {
@@ -37,16 +50,21 @@ final class ExcelDataExtractor {
   }
 
   private void extractSheet(Sheet sheet) {
-    new HeaderExtractInvoker(getBean(ConfigHeaderExtractor.class), sheet).invoke();
+    ConfigHeaderExtractor headerExtract = getBean(ConfigHeaderExtractor.class);
+    HeaderColumnExtractor columnExtract = getBean(HeaderColumnExtractor.class);
+
+    new HeaderExtractInvoker(headerExtract, sheet, columnExtract).invoke()
+        .ifPresent(h -> new DataRowExtractor(sheet, _excelPath, h).extract());
   }
 
   @SuppressWarnings("unchecked")
-  private <T> T getBean(Class<?> beanType) {
+  private <T> T getBean(Class<T> beanType) {
     Object bean = _context.get(beanType);
     return (T) checkNotNull(bean, beanType.getName());
   }
 
-  private final Path _excelPath;
+  private static final Logger LOG = LoggerFactory.getLogger(ExcelDataExtractor.class);
 
+  private final Path _excelPath;
   private final Map<Class<?>, Object> _context;
 }

@@ -10,26 +10,28 @@ public class ColumnExtractInvoker {
     String fieldName();
 
     Class<?> dataType();
+
+    boolean isPrimaryKey();
   }
 
-  public ColumnExtractInvoker(HeaderColumnExtractor columnExtractor, int columnIndex,
-      Sheet poiSheet) {
+  public ColumnExtractInvoker(HeaderColumnExtractor columnExtractor, int dataBeginColumn,
+      int columnIndex, Sheet poiSheet) {
     _columnExtractor = columnExtractor;
+    _dataBeginColumn = dataBeginColumn;
     _columnIndex = columnIndex;
     _poiSheet = poiSheet;
   }
 
   public Result invoke() {
-    ColumnImpl column = new ColumnImpl(_columnIndex, _poiSheet);
-    ReturnImpl aReturn = new ReturnImpl();
+    ColumnImpl column = new ColumnImpl(_dataBeginColumn, _columnIndex, _poiSheet);
+    ContextImpl ctx = new ContextImpl(column);
 
-    ContextImpl ctx = new ContextImpl(column, aReturn);
-    _columnExtractor.onExtract(ctx);
-
+    ReturnImpl aReturn = (ReturnImpl) _columnExtractor.onExtract(ctx);
     return new InvokeResultImpl(aReturn);
   }
 
   private final HeaderColumnExtractor _columnExtractor;
+  private final int _dataBeginColumn;
 
   private final int _columnIndex;
   private final Sheet _poiSheet;

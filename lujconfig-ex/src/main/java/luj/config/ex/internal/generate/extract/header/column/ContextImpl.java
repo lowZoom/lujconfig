@@ -4,9 +4,8 @@ import luj.config.ex.api.extract.HeaderColumnExtractor;
 
 final class ContextImpl implements HeaderColumnExtractor.Context {
 
-  ContextImpl(HeaderColumnExtractor.Column column, HeaderColumnExtractor.Return aReturn) {
+  ContextImpl(HeaderColumnExtractor.Column column) {
     _column = column;
-    _return = aReturn;
   }
 
   @Override
@@ -16,10 +15,8 @@ final class ContextImpl implements HeaderColumnExtractor.Context {
 
   @Override
   public HeaderColumnExtractor.Return returnColumn() {
-    return _return;
+    return new ReturnImpl();
   }
 
   private final HeaderColumnExtractor.Column _column;
-
-  private final HeaderColumnExtractor.Return _return;
 }

@@ -3,15 +3,15 @@ package luj.config.ex.internal.generate.extract.row;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 
-public class FieldValueReader {
+final class FieldValueReader {
 
-  public FieldValueReader(Cell poiCell, Class<?> dataType) {
+  FieldValueReader(Cell poiCell, Class<?> dataType) {
     _poiCell = poiCell;
     _dataType = dataType;
   }
 
   public Object read() {
-    if (_poiCell == null) {
+    if (_poiCell.getCellTypeEnum() == CellType.BLANK) {
       return null;
     }
 

@@ -16,5 +16,10 @@ final class InvokeResultImpl implements ColumnExtractInvoker.Result {
     return _return._dataType;
   }
 
+  @Override
+  public boolean isPrimaryKey() {
+    return _return._asPrimaryKey;
+  }
+
   private final ReturnImpl _return;
 }

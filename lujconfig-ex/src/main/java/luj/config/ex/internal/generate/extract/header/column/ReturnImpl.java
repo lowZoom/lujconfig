@@ -16,7 +16,14 @@ final class ReturnImpl implements HeaderColumnExtractor.Return {
     return this;
   }
 
-  String _fieldName;
+  @Override
+  public HeaderColumnExtractor.Return asPrimaryKey(boolean val) {
+    _asPrimaryKey = val;
+    return this;
+  }
 
+  String _fieldName;
   Class<?> _dataType;
+
+  boolean _asPrimaryKey;
 }

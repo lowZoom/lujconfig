@@ -27,6 +27,8 @@ public class HeaderExtractInvoker {
     String getFieldName();
 
     Class<?> getDataType();
+
+    boolean isPrimaryKey();
   }
 
   public HeaderExtractInvoker(ConfigHeaderExtractor headerExtractor, Sheet poiSheet,
@@ -58,10 +60,15 @@ public class HeaderExtractInvoker {
         .max()
         .orElse(0);
 
-    return IntStream.range(headerResult._dataBeginColumn, columnCount)
-        .mapToObj(i -> new ColumnExtractInvoker(_columnExtractor, i, _poiSheet).invoke())
+    int dataBeginColumn = headerResult._dataBeginColumn;
+    return IntStream.range(dataBeginColumn, columnCount)
+        .mapToObj(i -> invokeAppExtract(i, dataBeginColumn))
         .map(ColumnImpl::new)
         .collect(Collectors.toList());
+  }
+
+  private ColumnExtractInvoker.Result invokeAppExtract(int curCol, int dataBeginCol) {
+    return new ColumnExtractInvoker(_columnExtractor, dataBeginCol, curCol, _poiSheet).invoke();
   }
 
   private final ConfigHeaderExtractor _headerExtractor;

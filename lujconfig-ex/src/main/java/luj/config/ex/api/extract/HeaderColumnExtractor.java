@@ -11,6 +11,8 @@ public interface HeaderColumnExtractor {
 
   interface Column {
 
+    int getIndex();
+
     Cell getCell(int row);
   }
 
@@ -24,6 +26,8 @@ public interface HeaderColumnExtractor {
     Return fieldName(String val);
 
     Return dataType(Class<?> val);
+
+    Return asPrimaryKey(boolean val);
   }
 
   Return onExtract(Context ctx);

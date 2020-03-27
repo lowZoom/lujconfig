@@ -19,6 +19,11 @@ final class ColumnImpl implements HeaderExtractInvoker.Column {
   }
 
   @Override
+  public boolean isPrimaryKey() {
+    return _columnResult.isPrimaryKey();
+  }
+
+  @Override
   public String toString() {
     return getFieldName();
   }

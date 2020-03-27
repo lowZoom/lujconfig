@@ -5,6 +5,7 @@ import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import luj.config.ex.api.extract.exception.InvalidValueException;
 import luj.config.ex.api.extract.exception.RedundantColumnException;
@@ -17,24 +18,35 @@ import org.slf4j.LoggerFactory;
 
 public class DataRowExtractor {
 
+  public interface DataRow {
+
+    int index();
+
+    Map<String, Object> valueMap();
+  }
+
   public DataRowExtractor(Sheet poiSheet, Path bookPath, HeaderExtractInvoker.Header header) {
     _poiSheet = poiSheet;
     _bookPath = bookPath;
     _header = header;
   }
 
-  public void extract() {
+  public List<DataRow> extract() {
     int rowCount = _poiSheet.getLastRowNum() + 1;
-
-    for (int i = _header.getDataBeginRow(); i < rowCount; i++) {
-      Row row = _poiSheet.getRow(i);
-      Map<String, Object> valueMap = extractOne(row);
-
-      LOG.debug("{}", valueMap);
-    }
+    return IntStream.range(_header.getDataBeginRow(), rowCount)
+        .mapToObj(_poiSheet::getRow)
+        .map(this::extractOne)
+        .collect(Collectors.toList());
   }
 
-  private Map<String, Object> extractOne(Row row) {
+  private DataRow extractOne(Row row) {
+    Map<String, Object> valueMap = extractValue(row);
+    LOG.debug("{}", valueMap);
+
+    return new RowImpl(row.getRowNum(), valueMap);
+  }
+
+  private Map<String, Object> extractValue(Row row) {
     int beginCol = _header.getDataBeginColumn();
     List<HeaderExtractInvoker.Column> columnList = _header.getColumnList();
 
@@ -56,7 +68,7 @@ public class DataRowExtractor {
     Field field = new Field();
     field._headerCol = column;
 
-    field._poiCell = row.getCell(columnIndex);
+    field._poiCell = row.getCell(columnIndex, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
 //    checkNotNull(field._poiCell, "R%sC%s", row.getRowNum() + 1, columnIndex + 1);
 
     return field;

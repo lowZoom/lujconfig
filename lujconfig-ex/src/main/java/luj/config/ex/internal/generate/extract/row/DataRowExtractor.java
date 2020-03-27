@@ -2,6 +2,7 @@ package luj.config.ex.internal.generate.extract.row;
 
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 
+import com.google.common.collect.ImmutableMap;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,6 @@ import luj.config.ex.internal.generate.extract.header.HeaderExtractInvoker;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class DataRowExtractor {
 
@@ -34,16 +33,18 @@ public class DataRowExtractor {
   public List<DataRow> extract() {
     int rowCount = _poiSheet.getLastRowNum() + 1;
     return IntStream.range(_header.getDataBeginRow(), rowCount)
-        .mapToObj(_poiSheet::getRow)
-        .map(this::extractOne)
+        .mapToObj(this::extractOne)
         .collect(Collectors.toList());
   }
 
-  private DataRow extractOne(Row row) {
-    Map<String, Object> valueMap = extractValue(row);
+  private DataRow extractOne(int rowIndex) {
+    Row row = _poiSheet.getRow(rowIndex);
+//    checkNotNull(_poiSheet.getRow(rowIndex), rowIndex);
+
+    Map<String, Object> valueMap = (row == null) ? ImmutableMap.of() : extractValue(row);
 //    LOG.debug("{}", valueMap);
 
-    return new RowImpl(row.getRowNum(), valueMap);
+    return new RowImpl(rowIndex, valueMap);
   }
 
   private Map<String, Object> extractValue(Row row) {
@@ -98,7 +99,7 @@ public class DataRowExtractor {
     Object _fieldValue;
   }
 
-  private static final Logger LOG = LoggerFactory.getLogger(DataRowExtractor.class);
+//  private static final Logger LOG = LoggerFactory.getLogger(DataRowExtractor.class);
 
   private final Sheet _poiSheet;
 

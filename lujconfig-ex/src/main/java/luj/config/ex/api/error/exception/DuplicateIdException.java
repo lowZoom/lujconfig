@@ -1,4 +1,4 @@
-package luj.config.ex.api.extract.exception;
+package luj.config.ex.api.error.exception;
 
 import java.nio.file.Path;
 import java.util.List;

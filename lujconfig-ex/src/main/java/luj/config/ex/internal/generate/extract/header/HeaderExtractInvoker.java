@@ -1,5 +1,6 @@
 package luj.config.ex.internal.generate.extract.header;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -32,10 +33,11 @@ public class HeaderExtractInvoker {
   }
 
   public HeaderExtractInvoker(ConfigHeaderExtractor headerExtractor, Sheet poiSheet,
-      HeaderColumnExtractor columnExtractor) {
+      HeaderColumnExtractor columnExtractor, Path workbookPath) {
     _headerExtractor = headerExtractor;
     _poiSheet = poiSheet;
     _columnExtractor = columnExtractor;
+    _workbookPath = workbookPath;
   }
 
   public Optional<Header> invoke() {
@@ -68,11 +70,14 @@ public class HeaderExtractInvoker {
   }
 
   private ColumnExtractInvoker.Result invokeAppExtract(int curCol, int dataBeginCol) {
-    return new ColumnExtractInvoker(_columnExtractor, dataBeginCol, curCol, _poiSheet).invoke();
+    return new ColumnExtractInvoker(_columnExtractor,
+        dataBeginCol, curCol, _poiSheet, _workbookPath).invoke();
   }
 
   private final ConfigHeaderExtractor _headerExtractor;
 
   private final Sheet _poiSheet;
   private final HeaderColumnExtractor _columnExtractor;
+
+  private final Path _workbookPath;
 }

@@ -1,5 +1,6 @@
 package luj.config.ex.internal.generate.extract.header.column;
 
+import java.nio.file.Path;
 import luj.config.ex.api.extract.HeaderColumnExtractor;
 import org.apache.poi.ss.usermodel.Sheet;
 
@@ -15,16 +16,20 @@ public class ColumnExtractInvoker {
   }
 
   public ColumnExtractInvoker(HeaderColumnExtractor columnExtractor, int dataBeginColumn,
-      int columnIndex, Sheet poiSheet) {
+      int columnIndex, Sheet poiSheet, Path workbookPath) {
     _columnExtractor = columnExtractor;
     _dataBeginColumn = dataBeginColumn;
     _columnIndex = columnIndex;
     _poiSheet = poiSheet;
+    _workbookPath = workbookPath;
   }
 
   public Result invoke() {
+    ErrorContextImpl errorContext = new ErrorContextImpl(_workbookPath,
+        _poiSheet.getSheetName(), -1, _columnIndex + 1);
+
     ColumnImpl column = new ColumnImpl(_dataBeginColumn, _columnIndex, _poiSheet);
-    ContextImpl ctx = new ContextImpl(column);
+    ExtractContextImpl ctx = new ExtractContextImpl(column, errorContext);
 
     ReturnImpl aReturn = (ReturnImpl) _columnExtractor.onExtract(ctx);
     return new InvokeResultImpl(aReturn);
@@ -35,4 +40,6 @@ public class ColumnExtractInvoker {
 
   private final int _columnIndex;
   private final Sheet _poiSheet;
+
+  private final Path _workbookPath;
 }

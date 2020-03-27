@@ -2,8 +2,8 @@ package luj.config.ex.internal.generate.validate;
 
 import java.nio.file.Path;
 import java.util.List;
-import luj.config.ex.api.extract.exception.DuplicateIdException;
-import luj.config.ex.api.extract.exception.MissingIdException;
+import luj.config.ex.api.error.exception.DuplicateIdException;
+import luj.config.ex.api.error.exception.MissingIdException;
 import luj.config.ex.internal.generate.extract.book.ExcelDataExtractor;
 import luj.config.ex.internal.generate.validate.id.duplicate.DuplicateIdFinder;
 import luj.config.ex.internal.generate.validate.id.missing.MissingIdFinder;

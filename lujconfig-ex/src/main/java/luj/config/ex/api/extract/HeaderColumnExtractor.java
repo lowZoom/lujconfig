@@ -1,5 +1,7 @@
 package luj.config.ex.api.extract;
 
+import luj.config.ex.api.error.CellErrorMaker;
+
 public interface HeaderColumnExtractor {
 
   interface Context {
@@ -7,6 +9,8 @@ public interface HeaderColumnExtractor {
     Column getColumn();
 
     Return returnColumn();
+
+    RuntimeException error(CellErrorMaker maker);
   }
 
   interface Column {

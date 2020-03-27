@@ -86,7 +86,7 @@ public class ExcelDataExtractor {
     ConfigHeaderExtractor headerExtract = getBean(ConfigHeaderExtractor.class);
     HeaderColumnExtractor columnExtract = getBean(HeaderColumnExtractor.class);
 
-    return new HeaderExtractInvoker(headerExtract, sheet, columnExtract).invoke()
+    return new HeaderExtractInvoker(headerExtract, sheet, columnExtract, _excelPath).invoke()
         .map(h -> extractBody(sheet, h));
   }
 

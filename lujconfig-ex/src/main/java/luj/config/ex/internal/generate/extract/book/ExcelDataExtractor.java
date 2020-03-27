@@ -30,6 +30,10 @@ public class ExcelDataExtractor {
     Header getHeader();
 
     List<Row> getRowList();
+
+    String getName();
+
+    Path getWorkbookPath();
   }
 
   public interface Header {
@@ -95,7 +99,7 @@ public class ExcelDataExtractor {
         .map(RowImpl::new)
         .collect(Collectors.toList());
 
-    return new SheetImpl(headerOut, rowList);
+    return new SheetImpl(headerOut, rowList, sheet.getSheetName(), _excelPath);
   }
 
   @SuppressWarnings("unchecked")

@@ -1,4 +1,4 @@
-package luj.config.ex.internal.generate.validate.id;
+package luj.config.ex.internal.generate.validate.id.duplicate;
 
 import java.util.List;
 

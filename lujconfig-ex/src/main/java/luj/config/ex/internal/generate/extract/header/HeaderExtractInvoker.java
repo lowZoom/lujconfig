@@ -1,10 +1,11 @@
 package luj.config.ex.internal.generate.extract.header;
 
+import static java.util.stream.Collectors.toList;
+
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import luj.config.ex.api.extract.ConfigHeaderExtractor;
 import luj.config.ex.api.extract.HeaderColumnExtractor;
@@ -66,7 +67,7 @@ public class HeaderExtractInvoker {
     return IntStream.range(dataBeginColumn, columnCount)
         .mapToObj(i -> invokeAppExtract(i, dataBeginColumn))
         .map(ColumnImpl::new)
-        .collect(Collectors.toList());
+        .collect(toList());
   }
 
   private ColumnExtractInvoker.Result invokeAppExtract(int curCol, int dataBeginCol) {

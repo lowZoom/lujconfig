@@ -26,12 +26,12 @@ final class FieldValueReader {
       return getIntValue(actualType);
     }
 
-    if (_dataType == double.class || _dataType == float.class) {
+    if (_dataType == double.class) {
       return getDoubleValue(actualType);
     }
 
     if (_dataType == boolean.class) {
-      return getIntValue(actualType) > 0;
+      return Boolean.TRUE; //getIntValue(actualType) > 0;
     }
 
     return getStringValue(actualType);

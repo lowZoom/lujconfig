@@ -38,7 +38,7 @@ final class FieldValueReader {
   }
 
   private int getIntValue(CellType cellType) {
-    return (int) Math.round(getDoubleValue(cellType));
+    return Math.toIntExact(Math.round(getDoubleValue(cellType)));
   }
 
   private double getDoubleValue(CellType cellType) {

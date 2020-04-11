@@ -1,6 +1,7 @@
 package luj.config.ex.internal.generate.extract.book;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.ImmutableList;
 import java.io.IOException;
@@ -79,7 +80,7 @@ public class ExcelDataExtractor {
     return ImmutableList.copyOf(book.sheetIterator()).stream()
         .map(this::extractSheet)
         .flatMap(s -> s.map(Stream::of).orElseGet(Stream::empty))
-        .collect(Collectors.toList());
+        .collect(toList());
   }
 
   private Optional<DataSheet> extractSheet(Sheet sheet) {
@@ -97,7 +98,7 @@ public class ExcelDataExtractor {
 
     List<Row> rowList = new DataRowExtractor(sheet, _excelPath, header).extract().stream()
         .map(RowImpl::new)
-        .collect(Collectors.toList());
+        .collect(toList());
 
     return new SheetImpl(headerOut, rowList, sheet.getSheetName(), _excelPath);
   }

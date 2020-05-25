@@ -2,6 +2,7 @@ package luj.config.ex.internal.generate.extract.book;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 import com.google.common.collect.ImmutableList;
 import java.io.IOException;
@@ -10,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import luj.config.ex.api.extract.ConfigHeaderExtractor;
 import luj.config.ex.api.extract.HeaderColumnExtractor;
@@ -94,7 +94,7 @@ public class ExcelDataExtractor {
   private DataSheet extractBody(Sheet sheet, HeaderExtractInvoker.Header header) {
     HeaderImpl headerOut = new HeaderImpl(header.getColumnList().stream()
         .map(FieldImpl::new)
-        .collect(Collectors.toMap(FieldImpl::getName, Function.identity())));
+        .collect(toMap(FieldImpl::getName, Function.identity())));
 
     List<Row> rowList = new DataRowExtractor(sheet, _excelPath, header).extract().stream()
         .map(RowImpl::new)

@@ -18,5 +18,10 @@ final class FieldImpl implements ExcelDataExtractor.Field {
     return _column.isPrimaryKey();
   }
 
+  @Override
+  public String toString() {
+    return "Field[name=" + getName() + "]";
+  }
+
   private final HeaderExtractInvoker.Column _column;
 }

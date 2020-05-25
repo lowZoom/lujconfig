@@ -2,10 +2,6 @@ package luj.config.ex.internal.generate.extract.header.column;
 
 final class InvokeResultImpl implements ColumnExtractInvoker.Result {
 
-  InvokeResultImpl(ReturnImpl aReturn) {
-    _return = aReturn;
-  }
-
   @Override
   public String fieldName() {
     return _return._fieldName;
@@ -21,5 +17,11 @@ final class InvokeResultImpl implements ColumnExtractInvoker.Result {
     return _return._asPrimaryKey;
   }
 
-  private final ReturnImpl _return;
+  @Override
+  public int columnIndex() {
+    return _columnIndex;
+  }
+
+  ReturnImpl _return;
+  int _columnIndex;
 }

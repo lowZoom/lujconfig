@@ -13,6 +13,8 @@ public class ColumnExtractInvoker {
     Class<?> dataType();
 
     boolean isPrimaryKey();
+
+    int columnIndex();
   }
 
   public ColumnExtractInvoker(HeaderColumnExtractor columnExtractor, int dataBeginColumn,
@@ -31,8 +33,11 @@ public class ColumnExtractInvoker {
     ColumnImpl column = new ColumnImpl(_dataBeginColumn, _columnIndex, _poiSheet);
     ExtractContextImpl ctx = new ExtractContextImpl(column, errorContext);
 
-    ReturnImpl aReturn = (ReturnImpl) _columnExtractor.onExtract(ctx);
-    return new InvokeResultImpl(aReturn);
+    InvokeResultImpl result = new InvokeResultImpl();
+    result._return = (ReturnImpl) _columnExtractor.onExtract(ctx);
+    result._columnIndex = _columnIndex;
+
+    return result;
   }
 
   private final HeaderColumnExtractor _columnExtractor;

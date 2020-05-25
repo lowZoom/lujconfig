@@ -8,6 +8,10 @@ final class ColumnImpl implements HeaderExtractInvoker.Column {
     _columnResult = columnResult;
   }
 
+  public int getIndex() {
+    return _columnResult.columnIndex();
+  }
+
   @Override
   public String getFieldName() {
     return _columnResult.fieldName();

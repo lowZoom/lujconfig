@@ -1,5 +1,6 @@
 package luj.config.ex.internal.generate.extract.header;
 
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 import java.nio.file.Path;
@@ -7,11 +8,13 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.IntStream;
+import luj.config.ex.api.error.exception.DuplicateHeaderException;
 import luj.config.ex.api.extract.ConfigHeaderExtractor;
 import luj.config.ex.api.extract.HeaderColumnExtractor;
 import luj.config.ex.internal.generate.extract.header.column.ColumnExtractInvoker;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.util.CellReference;
 
 public class HeaderExtractInvoker {
 
@@ -52,6 +55,8 @@ public class HeaderExtractInvoker {
     }
 
     List<Column> columnList = extractColumn(headerResult);
+    checkDuplicateHeader(columnList);
+
     return Optional.of(new HeaderImpl(headerResult, columnList));
   }
 
@@ -73,6 +78,25 @@ public class HeaderExtractInvoker {
   private ColumnExtractInvoker.Result invokeAppExtract(int curCol, int dataBeginCol) {
     return new ColumnExtractInvoker(_columnExtractor,
         dataBeginCol, curCol, _poiSheet, _workbookPath).invoke();
+  }
+
+  private void checkDuplicateHeader(List<Column> columnList) {
+    columnList.stream()
+        .collect(groupingBy(Column::getFieldName)).entrySet().stream()
+        .filter(e -> e.getValue().size() > 1)
+        .findAny()
+        .ifPresent(e -> throwDuplicateHeader(e.getKey(), e.getValue()));
+  }
+
+  private void throwDuplicateHeader(String fieldName, List<Column> columnList) {
+    List<String> dupCols = columnList.stream()
+        .map(c -> (ColumnImpl) c)
+        .map(ColumnImpl::getIndex)
+        .map(CellReference::convertNumToColString)
+        .collect(toList());
+
+    String sheetName = _poiSheet.getSheetName();
+    throw new DuplicateHeaderException(_workbookPath, sheetName, fieldName, dupCols);
   }
 
   private final ConfigHeaderExtractor _headerExtractor;

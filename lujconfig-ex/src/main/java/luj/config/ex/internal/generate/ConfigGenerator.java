@@ -3,8 +3,9 @@ package luj.config.ex.internal.generate;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Map;
-import luj.config.ex.internal.generate.extract.book.ExcelDataExtractor;
-import luj.config.ex.internal.generate.validate.DataSheetValidator;
+import luj.config.ex.internal.read.extract.book.ExcelDataExtractor;
+import luj.config.ex.internal.read.validate.DataSheetValidator;
+import luj.config.ex.internal.write.SheetToFileWriter;
 
 public class ConfigGenerator {
 
@@ -17,7 +18,8 @@ public class ConfigGenerator {
     new ExcelPathCollector(_excelDir).collect().stream()
         .map(p -> new ExcelDataExtractor(p, _context).extract())
         .flatMap(Collection::stream)
-        .forEach(s -> new DataSheetValidator(s).validate());
+        .map(s -> new DataSheetValidator(s).validate())
+        .forEach(s -> new SheetToFileWriter(s, _context).write());
   }
 
   private final Path _excelDir;

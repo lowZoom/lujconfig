@@ -73,7 +73,7 @@ public class ExcelDataExtractor {
   }
 
   private XSSFWorkbook openExcel(Path path) throws IOException, InvalidFormatException {
-    return new XSSFWorkbook(OPCPackage.open(path.toString(), PackageAccess.READ));
+    return new XSSFWorkbook(OPCPackage.open(path.toFile(), PackageAccess.READ));
   }
 
   private List<DataSheet> extractBook(XSSFWorkbook book) {

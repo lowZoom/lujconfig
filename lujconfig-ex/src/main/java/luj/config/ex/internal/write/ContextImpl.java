@@ -1,7 +1,6 @@
 package luj.config.ex.internal.write;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import luj.config.ex.api.out.ConfigFileWriter;
@@ -20,8 +19,10 @@ final class ContextImpl implements ConfigFileWriter.Context, ConfigFileWriter.Sh
   }
 
   @Override
-  public List<String> getHeader() {
-    return new ArrayList<>(_sheet.getHeader().getFieldMap().keySet());
+  public List<ConfigFileWriter.Field> getHeader() {
+    return _sheet.getHeader().getFieldMap().values().stream()
+        .map(FieldImpl::new)
+        .collect(Collectors.toList());
   }
 
   @Override

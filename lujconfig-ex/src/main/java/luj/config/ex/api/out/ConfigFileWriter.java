@@ -17,9 +17,16 @@ public interface ConfigFileWriter {
 
     String getName();
 
-    List<String> getHeader();
+    List<Field> getHeader();
 
     List<Row> getRowList();
+  }
+
+  interface Field {
+
+    String getName();
+
+    boolean isPrimaryKey();
   }
 
   interface Row {

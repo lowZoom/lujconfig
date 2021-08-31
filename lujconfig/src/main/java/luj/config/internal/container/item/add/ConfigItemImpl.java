@@ -5,10 +5,11 @@ import luj.config.api.container.ConfigItem;
 
 final class ConfigItemImpl implements ConfigItem {
 
-  @SuppressWarnings("unchecked")
   @Override
   public <C> C getValue(Class<C> type) {
-    return (C) _value.getValueInstance();
+    ImmutableBean<C> newVal = _value.as(type);
+    _value = newVal;
+    return newVal.getValueInstance();
   }
 
   ImmutableBean<?> _value;

@@ -1,5 +1,6 @@
 package luj.config.internal.container.type.add;
 
+import java.util.Collection;
 import java.util.Map;
 import luj.bean.api.BeanContext;
 import luj.config.api.container.ConfigItem;
@@ -16,6 +17,11 @@ final class TypeMapImpl implements TypeMap {
   @Override
   public ConfigItem findItem(Comparable<?> id) {
     return _itemAll.get(id);
+  }
+
+  @Override
+  public Collection<ConfigItem> getItems() {
+    return _itemAll.values();
   }
 
   Class<?> _configType;

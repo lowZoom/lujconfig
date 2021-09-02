@@ -6,12 +6,18 @@ import luj.bean.api.BeanContext;
 import luj.config.api.container.ConfigContainer;
 import luj.config.api.container.TypeMap;
 import luj.config.internal.container.type.add.ConfigTypeAdder;
+import luj.config.internal.container.typeglobal.add.GlobalTypeAdder;
 
 final class ConfigContainerImpl implements ConfigContainer {
 
   @Override
   public void addType(String typeKey, Class<?> type) {
     new ConfigTypeAdder(_typeAll, typeKey, type, _lujbean).add();
+  }
+
+  @Override
+  public void addGlobalType(String typeKey, Class<?> type) {
+    new GlobalTypeAdder(_typeAll, typeKey, type, _lujbean).add();
   }
 
   @Override

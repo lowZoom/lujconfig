@@ -3,11 +3,15 @@ package luj.config.internal.container.typeglobal.add;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.ImmutableList;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 import luj.config.api.container.ConfigItem;
 import luj.config.api.container.TypeMap;
+import luj.config.internal.container.item.add.ConfigValueConverter;
 
 final class TypeMapGlobal implements TypeMap {
 
@@ -20,9 +24,15 @@ final class TypeMapGlobal implements TypeMap {
     Object fieldKey2 = value.get(idField);
     checkArgument(fieldKey.equals(fieldKey2), "%s, %s", fieldKey, fieldKey2);
 
-    //TODO: 转换类型
+    Optional<Class<?>> targetType = Arrays.stream(_configType.getMethods())
+        .filter(m -> m.getName().equals(fieldKey))
+        .findAny()
+        .map(Method::getReturnType);
 
-    _fieldMap.put(fieldKey, fieldVal);
+    Object newVal = !targetType.isPresent() ? fieldVal :
+        ConfigValueConverter.GET.convert(fieldVal, targetType.get());
+
+    _fieldMap.put(fieldKey.intern(), newVal);
   }
 
   @Override
@@ -33,6 +43,11 @@ final class TypeMapGlobal implements TypeMap {
   @Override
   public Collection<ConfigItem> getItems() {
     return ImmutableList.of(_item);
+  }
+
+  @Override
+  public boolean isGlobal() {
+    return true;
   }
 
   Class<?> _configType;

@@ -10,4 +10,8 @@ public interface TypeMap {
   ConfigItem findItem(Comparable<?> id);
 
   Collection<ConfigItem> getItems();
+
+  default boolean isGlobal() {
+    return false;
+  }
 }

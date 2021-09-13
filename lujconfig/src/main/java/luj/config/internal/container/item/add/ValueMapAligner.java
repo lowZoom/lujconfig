@@ -2,6 +2,7 @@ package luj.config.internal.container.item.add;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import com.google.common.base.Defaults;
 import com.google.common.collect.ImmutableMap;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -24,25 +25,6 @@ enum ValueMapAligner {
   }
 
   private Object convertValue(Object old, Class<?> newType) {
-    if (old instanceof String) {
-      return strTo((String) old, newType);
-    }
-
-    throw new UnsupportedOperationException("未知类型：" + old.getClass().getName());
-  }
-
-//  private Object intTo(Integer val, Class<?> newType) {
-//    if (newType == Integer.class || newType == int.class) {
-//      return val;
-//    }
-//
-//  }
-
-  private Object strTo(String val, Class<?> newType) {
-    if (newType == Integer.class || newType == int.class) {
-      return Integer.valueOf(val);
-    }
-
-    return val;
+    return ConfigValueConverter.GET.convert(old, newType);
   }
 }

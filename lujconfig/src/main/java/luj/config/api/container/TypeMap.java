@@ -14,4 +14,8 @@ public interface TypeMap {
   default boolean isGlobal() {
     return false;
   }
+
+  default boolean isAbsent() {
+    return false;
+  }
 }

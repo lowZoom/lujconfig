@@ -23,4 +23,9 @@ enum TypeMapNull implements TypeMap {
   public Collection<ConfigItem> getItems() {
     return ImmutableList.of();
   }
+
+  @Override
+  public boolean isAbsent() {
+    return true;
+  }
 }

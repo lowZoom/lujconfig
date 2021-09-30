@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.Map;
 import luj.bean.api.BeanContext;
 import luj.config.api.container.ConfigItem;
+import luj.config.internal.container.type.factory.ConfigTypeFactory;
 
 public enum TypeItemAdder {
   GET;
@@ -14,7 +15,9 @@ public enum TypeItemAdder {
     ConfigItemImpl item = new ConfigItemImpl();
 
     Map<String, Object> newValue = ValueMapAligner.GET.align(value, configType);
-    item._value = lujbean.createImmutable(configType, newValue);
+    item._value = lujbean.createBean(configType, newValue);
+    item._idField = idField;
+    item._type = ConfigTypeFactory.GET.create(configType);
 
     Object id = newValue.get(idField);
     checkNotNull(id, idField);

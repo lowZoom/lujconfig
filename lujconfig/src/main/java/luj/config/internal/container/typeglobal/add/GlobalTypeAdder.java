@@ -1,11 +1,10 @@
 package luj.config.internal.container.typeglobal.add;
 
-import com.google.common.collect.ImmutableMap;
 import java.util.Map;
 import luj.bean.api.BeanContext;
 import luj.bean.api.bean.Bean;
-import luj.bean.api.bean.ImmutableBean;
 import luj.config.api.container.TypeMap;
+import luj.config.internal.container.type.factory.ConfigTypeFactory;
 
 public class GlobalTypeAdder {
 
@@ -24,6 +23,7 @@ public class GlobalTypeAdder {
     GlobalItemImpl item = new GlobalItemImpl();
     Bean<?> valueBean = _lujbean.createBean(_type);
     item._value = valueBean;
+    item._type = ConfigTypeFactory.GET.create(_type);
 
     typeMap._item = item;
     typeMap._fieldMap = valueBean.getFieldMap();

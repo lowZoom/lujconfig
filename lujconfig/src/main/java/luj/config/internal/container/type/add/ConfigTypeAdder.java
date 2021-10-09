@@ -1,9 +1,11 @@
 package luj.config.internal.container.type.add;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import luj.bean.api.BeanContext;
 import luj.config.api.container.TypeMap;
+import luj.config.internal.container.type.factory.ConfigTypeFactory;
 
 public class ConfigTypeAdder {
 
@@ -17,9 +19,9 @@ public class ConfigTypeAdder {
 
   public void add() {
     TypeMapImpl type = new TypeMapImpl();
-    type._itemAll = new HashMap<>();
+    type._itemAll = new LinkedHashMap<>();
 
-    type._configType = _type;
+    type._configType = ConfigTypeFactory.GET.create(_type);
     type._lujbean = _lujbean;
 
     _typeAll.put(_typeKey, type);

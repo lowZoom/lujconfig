@@ -1,17 +1,34 @@
 package luj.config.api.container;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ConfigType {
 
   interface Field {
 
-    interface Type {
+    interface TypeLike {
+
+      Class<?> asClass();
+
+      Field getParentField();
+    }
+
+    interface Type extends TypeLike {
 
       boolean isReference();
 
-      Class<?> asClass();
+      Optional<CollectionType> asCollectionType();
     }
+
+    interface CollectionType extends TypeLike {
+
+      Type getElementType();
+
+      int getDimension();
+    }
+
+    ////////////////////////////////
 
     String getName();
 
@@ -19,4 +36,6 @@ public interface ConfigType {
   }
 
   List<Field> getFields();
+
+  Class<?> asClass();
 }

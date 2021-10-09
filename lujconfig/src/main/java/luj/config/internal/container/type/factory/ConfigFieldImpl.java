@@ -16,5 +16,5 @@ final class ConfigFieldImpl implements ConfigType.Field {
 
   String _name;
 
-  ConfigFieldTypeImpl _type;
+  Type _type;
 }

@@ -3,13 +3,12 @@ package luj.config.internal.container.typeglobal.add;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.collect.ImmutableList;
-import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 import luj.config.api.container.ConfigItem;
+import luj.config.api.container.ConfigType;
 import luj.config.api.container.TypeMap;
 import luj.config.internal.container.item.add.ConfigValueConverter;
 
@@ -24,10 +23,10 @@ final class TypeMapGlobal implements TypeMap {
     Object fieldKey2 = value.get(idField);
     checkArgument(fieldKey.equals(fieldKey2), "%s, %s", fieldKey, fieldKey2);
 
-    Optional<Class<?>> targetType = Arrays.stream(_configType.getMethods())
-        .filter(m -> m.getName().equals(fieldKey))
+    Optional<Class<?>> targetType = _configType.getFields().stream()
+        .filter(f -> f.getName().equals(fieldKey))
         .findAny()
-        .map(Method::getReturnType);
+        .map(f -> f.getType().asClass());
 
     Object newVal = !targetType.isPresent() ? fieldVal :
         ConfigValueConverter.GET.convert(fieldVal, targetType.get());
@@ -46,11 +45,16 @@ final class TypeMapGlobal implements TypeMap {
   }
 
   @Override
+  public ConfigType getType() {
+    return _configType;
+  }
+
+  @Override
   public boolean isGlobal() {
     return true;
   }
 
-  Class<?> _configType;
+  ConfigType _configType;
 
   ConfigItem _item;
   Map<String, Object> _fieldMap;

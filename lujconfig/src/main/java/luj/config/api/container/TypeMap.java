@@ -11,6 +11,8 @@ public interface TypeMap {
 
   Collection<ConfigItem> getItems();
 
+  ConfigType getType();
+
   default boolean isGlobal() {
     return false;
   }

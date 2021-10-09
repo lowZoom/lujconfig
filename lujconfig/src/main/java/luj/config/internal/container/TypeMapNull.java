@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.Map;
 import luj.config.api.container.ConfigItem;
+import luj.config.api.container.ConfigType;
 import luj.config.api.container.TypeMap;
 
 enum TypeMapNull implements TypeMap {
@@ -22,6 +23,11 @@ enum TypeMapNull implements TypeMap {
   @Override
   public Collection<ConfigItem> getItems() {
     return ImmutableList.of();
+  }
+
+  @Override
+  public ConfigType getType() {
+    return ConfigTypeNull.INSTANCE;
   }
 
   @Override

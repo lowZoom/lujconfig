@@ -18,7 +18,7 @@ public class GlobalTypeAdder {
 
   public void add() {
     TypeMapGlobal typeMap = new TypeMapGlobal();
-    typeMap._configType = _type;
+    typeMap._configType = ConfigTypeFactory.GET.create(_type);
 
     GlobalItemImpl item = new GlobalItemImpl();
     Bean<?> valueBean = _lujbean.createBean(_type);

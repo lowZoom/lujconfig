@@ -11,6 +11,11 @@ final class ConfigTypeImpl implements ConfigType {
   }
 
   @Override
+  public Class<?> asClass() {
+    return _class;
+  }
+
+  @Override
   public String toString() {
     return _class.getName();
   }

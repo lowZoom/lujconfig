@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.base.Defaults;
 import com.google.common.collect.ImmutableMap;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.Map;
 
 enum ValueMapAligner {
@@ -25,6 +26,9 @@ enum ValueMapAligner {
   }
 
   private Object convertValue(Object old, Class<?> newType) {
+    if (old instanceof Collection) {
+      return old;
+    }
     return ConfigValueConverter.GET.convert(old, newType);
   }
 }

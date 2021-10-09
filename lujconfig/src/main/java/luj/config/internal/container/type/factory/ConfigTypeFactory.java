@@ -1,9 +1,12 @@
 package luj.config.internal.container.type.factory;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import luj.ava.reflect.type.TypeX;
 import luj.config.api.container.ConfigType;
+import luj.config.internal.container.type.factory.field.FieldTypeFactory;
 
 public enum ConfigTypeFactory {
   GET;
@@ -23,9 +26,8 @@ public enum ConfigTypeFactory {
     ConfigFieldImpl field = new ConfigFieldImpl();
     field._name = method.getName();
 
-    ConfigFieldTypeImpl fieldType = new ConfigFieldTypeImpl();
-    fieldType._class = method.getReturnType();
-    field._type = fieldType;
+    Type fieldType = method.getGenericReturnType();
+    field._type = new FieldTypeFactory(TypeX.of(fieldType), field).create();
 
     return field;
   }

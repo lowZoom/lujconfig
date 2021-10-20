@@ -17,7 +17,7 @@ public class CollectionTypeFactory {
     type._class = _fieldType.asClass();
     type._parentField = _field;
 
-    type._elementType = new FieldTypeFactory(_fieldType, _field).create();
+    type._elementType = new FieldTypeFactory(_fieldType.getTypeParam(0), _field).create();
     type._dimension = countDimension();
 
     return type;

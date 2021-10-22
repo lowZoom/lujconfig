@@ -17,15 +17,16 @@ public class CollectionTypeFactory {
     type._class = _fieldType.asClass();
     type._parentField = _field;
 
-    type._elementType = new FieldTypeFactory(_fieldType.getTypeParam(0), _field).create();
-    type._dimension = countDimension();
+    TypeX<?> elemType = _fieldType.getTypeParam(0);
+    type._elementType = new FieldTypeFactory(elemType, _field).create();
+    type._dimension = countDimension(elemType);
 
     return type;
   }
 
-  private int countDimension() {
-    int count = 0;
-    TypeX<?> cursor = _fieldType;
+  private int countDimension(TypeX<?> elemType) {
+    int count = 1;
+    TypeX<?> cursor = elemType;
 
     while (cursor.isAssignableTo(Collection.class)) {
       ++count;

@@ -14,6 +14,11 @@ final class ConfigFieldImpl implements ConfigType.Field {
     return _type;
   }
 
+  @Override
+  public String toString() {
+    return _name + ":" + _type;
+  }
+
   String _name;
 
   Type _type;

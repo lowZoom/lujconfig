@@ -1,5 +1,7 @@
 package luj.config.internal.container.item.add;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.base.Defaults;
 
 public enum ConfigValueConverter {
@@ -26,6 +28,10 @@ public enum ConfigValueConverter {
     if (newType == Integer.class || newType == int.class) {
       return Integer.valueOf(val);
     }
+    if (newType == double.class) {
+      return Double.valueOf(val);
+    }
+    checkState(!newType.isPrimitive(), "未知类型：" + newType.getName());
     return val;
   }
 }

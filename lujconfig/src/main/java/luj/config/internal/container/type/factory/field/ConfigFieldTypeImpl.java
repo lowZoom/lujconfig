@@ -32,6 +32,11 @@ final class ConfigFieldTypeImpl implements ConfigType.Field.Type {
     return _parentField;
   }
 
+  @Override
+  public String toString() {
+    return _type.toString().replaceAll("\\bjava\\.(\\w+\\.)+", "");
+  }
+
   TypeX<?> _type;
 
   Class<?> _class;

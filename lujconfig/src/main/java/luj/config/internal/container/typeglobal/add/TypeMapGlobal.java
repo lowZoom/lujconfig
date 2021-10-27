@@ -23,13 +23,14 @@ final class TypeMapGlobal implements TypeMap {
     Object fieldKey2 = value.get(idField);
     checkArgument(fieldKey.equals(fieldKey2), "%s, %s", fieldKey, fieldKey2);
 
+    // 找代码声明里有没有对应字段
     Optional<Class<?>> targetType = _configType.getFields().stream()
         .filter(f -> f.getName().equals(fieldKey))
         .findAny()
         .map(f -> f.getType().asClass());
 
-    Object newVal = !targetType.isPresent() ? fieldVal :
-        ConfigValueConverter.GET.convert(fieldVal, targetType.get());
+    Object newVal = !targetType.isPresent() || fieldVal instanceof Collection ?
+        fieldVal : ConfigValueConverter.GET.convert(fieldVal, targetType.get());
 
     _fieldMap.put(fieldKey.intern(), newVal);
   }

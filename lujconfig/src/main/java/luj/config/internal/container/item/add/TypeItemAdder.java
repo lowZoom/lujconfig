@@ -18,6 +18,7 @@ public enum TypeItemAdder {
     item._value = lujbean.createBean(configType, newValue);
     item._idField = idField;
     item._type = ConfigTypeFactory.GET.create(configType);
+    item._lujbean = lujbean;
 
     Object id = newValue.get(idField);
     checkNotNull(id, idField);

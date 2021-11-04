@@ -1,18 +1,20 @@
 package luj.config.internal.container.item.add;
 
+import luj.bean.api.BeanContext;
 import luj.bean.api.bean.Bean;
+import luj.bean.api.bean.ImmutableBean;
 import luj.config.api.container.ConfigItem;
 import luj.config.api.container.ConfigType;
 import luj.config.internal.container.item.field.ItemFieldFactory;
+import luj.config.internal.container.item.value.ValueCacheRefresher;
 
 final class ConfigItemImpl implements ConfigItem {
 
   @Override
   public <C> C getValue(Class<C> type) {
-//    ImmutableBean<C> newVal = _value.as(type);
-//    _value = newVal;
-//    return newVal.getValueInstance();
-    return (C) _value.getValueInstance();
+    ImmutableBean<C> cache = ValueCacheRefresher.GET.refresh(_value, _valueCache, type, _lujbean);
+    _valueCache = cache;
+    return cache.getValueInstance();
   }
 
   @Override
@@ -31,7 +33,10 @@ final class ConfigItemImpl implements ConfigItem {
   }
 
   Bean<?> _value;
-  String _idField;
+  ImmutableBean<?> _valueCache;
 
+  String _idField;
   ConfigType _type;
+
+  BeanContext _lujbean;
 }

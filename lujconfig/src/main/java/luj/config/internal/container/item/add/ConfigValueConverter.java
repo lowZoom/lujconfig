@@ -11,21 +11,17 @@ public enum ConfigValueConverter {
     if (old instanceof String) {
       return strTo((String) old, newType);
     }
+    if (old instanceof Integer) {
+      return intTo((Integer) old, newType);
+    }
     if (old == null) {
       return Defaults.defaultValue(newType);
     }
     throw new UnsupportedOperationException("未知类型：" + old.getClass().getName());
   }
 
-//  private Object intTo(Integer val, Class<?> newType) {
-//    if (newType == Integer.class || newType == int.class) {
-//      return val;
-//    }
-//
-//  }
-
   private Object strTo(String val, Class<?> newType) {
-    if (newType == Integer.class || newType == int.class) {
+    if (isInt(newType)) {
       return Integer.valueOf(val);
     }
     if (newType == double.class) {
@@ -33,5 +29,16 @@ public enum ConfigValueConverter {
     }
     checkState(!newType.isPrimitive(), "未知类型：" + newType.getName());
     return val;
+  }
+
+  private Object intTo(Integer val, Class<?> newType) {
+    if (newType == String.class) {
+      return val.toString();
+    }
+    return val;
+  }
+
+  private boolean isInt(Class<?> type) {
+    return type == Integer.class || type == int.class;
   }
 }

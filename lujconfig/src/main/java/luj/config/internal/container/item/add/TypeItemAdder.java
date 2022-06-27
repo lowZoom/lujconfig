@@ -21,7 +21,7 @@ public enum TypeItemAdder {
     item._lujbean = lujbean;
 
     Object id = newValue.get(idField);
-    checkNotNull(id, idField);
+    checkNotNull(id, "%s#%s", configType.getName(), idField);
 
     itemAll.put((Comparable<?>) id, item);
   }

@@ -79,6 +79,5 @@ final class LineJsonParserImpl implements LineJsonParser {
   private static final ObjectMapper JACKSON = new ObjectMapper();
 
   private final String _jsonStr;
-
   private final Config _config;
 }

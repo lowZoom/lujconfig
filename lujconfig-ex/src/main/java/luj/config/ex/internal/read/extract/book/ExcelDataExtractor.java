@@ -20,6 +20,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.opc.PackageAccess;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +63,7 @@ public class ExcelDataExtractor {
   }
 
   public List<DataSheet> extract() {
-    LOG.debug("{}", _excelPath);
+//    LOG.debug("{}", _excelPath);
 
     try (XSSFWorkbook workbook = openExcel(_excelPath)) {
       return extractBook(workbook);
@@ -76,7 +77,7 @@ public class ExcelDataExtractor {
     return new XSSFWorkbook(OPCPackage.open(path.toFile(), PackageAccess.READ));
   }
 
-  private List<DataSheet> extractBook(XSSFWorkbook book) {
+  private List<DataSheet> extractBook(Workbook book) {
     return ImmutableList.copyOf(book.sheetIterator()).stream()
         .map(this::extractSheet)
         .flatMap(s -> s.map(Stream::of).orElseGet(Stream::empty))

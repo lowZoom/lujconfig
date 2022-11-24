@@ -6,6 +6,6 @@ public enum LujConfig {
   ;
 
   public static ConfigSession start() {
-    return ConfigSessionFactory.getInstance().create();
+    return new ConfigSessionFactory().create();
   }
 }

@@ -1,14 +1,10 @@
 package luj.config.internal.session;
 
-import luj.ava.spring.InternalContext;
 import luj.config.api.ConfigSession;
 
-public interface ConfigSessionFactory {
+public class ConfigSessionFactory {
 
-  static ConfigSessionFactory getInstance() {
-    return InternalContext.Factory.create(InjectConfig.class)
-        .getRootBean(ConfigSessionFactory.class);
+  public ConfigSession create() {
+    return new ConfigSessionImpl();
   }
-
-  ConfigSession create();
 }
